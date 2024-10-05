@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Menus.Characters;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 
@@ -71,5 +72,32 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Exiting game");
         Application.Quit(0);
+    }
+
+    public void StartGame()
+    {
+        Debug.Log("Starting a new game");
+        SceneManager.LoadScene("AlgorithmsPlayground");
+    }
+
+    public void PauseGame()
+    {
+        Debug.Log("Pausing game");
+        Time.timeScale = 0;
+        Managers.MenuManager.Instance.ShowPauseMenu();
+    }
+
+    public void ResumeGame()
+    {
+        Debug.Log("Resuming game");
+        Time.timeScale = 1;
+        Managers.MenuManager.Instance.HideMenu();
+    }
+
+    public void QuitToStartMenu()
+    {
+        Debug.Log("Quitting to start menu");
+        // Time.timeScale = 1; // ensure timeScale is reset in case we're calling this on Pause
+        SceneManager.LoadScene("Start Menu");
     }
 }
