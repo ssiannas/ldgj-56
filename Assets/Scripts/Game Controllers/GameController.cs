@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Menus;
 using Menus.Characters;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,6 +31,14 @@ public class GameController : MonoBehaviour
     public delegate void GameOverDelegate();
 
     public event GameOverDelegate OnGameOver;
+
+    private enum State
+    {
+        Paused,
+        Playing
+    }
+
+    private State _state = State.Playing;
 
 
     private void Awake()
@@ -66,6 +76,30 @@ public class GameController : MonoBehaviour
     {
         _timer += Time.deltaTime;
         score = (uint)(_timer * timeModifier);
+        
+        TryTogglePauseMenu();
+    }
+
+    private void TryTogglePauseMenu()
+    {
+        if (SceneManager.GetActiveScene().name == "Start Menu") return;
+
+        // Use ESC or START keys for toggling pause menu
+        if (Input.GetKeyDown(KeyCode.Escape) 
+            || Input.GetKeyDown(KeyCode.Joystick1Button7))
+        {
+            switch (_state)
+            {
+                case State.Paused:
+                    ResumeGame();
+                    break;
+                case State.Playing:
+                    PauseGame();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 
     public void ExitGame()
@@ -77,6 +111,7 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Starting a new game");
+        Time.timeScale = 1;
         SceneManager.LoadScene("AlgorithmsPlayground");
     }
 
@@ -84,6 +119,7 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Pausing game");
         Time.timeScale = 0;
+        _state = State.Paused;
         Managers.MenuManager.Instance.ShowPauseMenu();
     }
 
@@ -91,13 +127,15 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Resuming game");
         Time.timeScale = 1;
+        _state = State.Playing;
         Managers.MenuManager.Instance.HideMenu();
     }
 
     public void QuitToStartMenu()
     {
         Debug.Log("Quitting to start menu");
-        // Time.timeScale = 1; // ensure timeScale is reset in case we're calling this on Pause
+        Time.timeScale = 1; // ensure timeScale is reset in case we're calling this on Pause
+        _state = State.Playing;
         SceneManager.LoadScene("Start Menu");
     }
 }
