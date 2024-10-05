@@ -21,13 +21,7 @@ public class PlayerBaseMechanics : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Stomper"))
-        {
-            GameOver();
-        }
-    }
+ 
 
     private void GameOver()
     {
