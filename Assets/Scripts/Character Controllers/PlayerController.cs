@@ -11,10 +11,10 @@ public class PlayerController: MonoBehaviour
 
     private PlayerMovementController movementController;
   
-    public void Awake()
+    public void Start()
     {
         movementController = new PlayerMovementController(this);
-        //GameControler.Instance.OnGameOver += onGameOver;
+        GameControler.Instance.OnGameOver += onGameOver;
     }
 
     public void FixedUpdate()
