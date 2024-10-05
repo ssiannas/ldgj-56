@@ -558,13 +558,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1
       objectReference: {fileID: 0}
+    - target: {fileID: 2856625779248387633, guid: a6cfb68a44d17744189f5709c90ef43f, type: 3}
+      propertyPath: m_TagString
+      value: Stomper
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236830578713187175, guid: a6cfb68a44d17744189f5709c90ef43f, type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 11400000, guid: bebd098920c0a1549970598538771e6f, type: 2}
     - target: {fileID: 8236830578713187175, guid: a6cfb68a44d17744189f5709c90ef43f, type: 3}
       propertyPath: obstacleLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8528692397722759763, guid: a6cfb68a44d17744189f5709c90ef43f, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5176360355318254094, guid: a6cfb68a44d17744189f5709c90ef43f, type: 3}

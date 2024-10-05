@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,12 @@ public class StomperBrain : EnemyBrain
 	[SerializeField] private float moveSpeed = 4f;
 
 	private Vector2 lastKnownPosition = Vector2.zero;
+	private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
+
+	public void OnEnable()
+	{
+		obstacleLayer = COLLISIONS_LAYER_MASK;
+	}
 
 	public override void Think(EnemyController entity)
 	{
