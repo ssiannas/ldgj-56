@@ -29,10 +29,13 @@ public class EnemyController : MonoBehaviour
 
 	[SerializeField] EnemyBrain brain;
 	public State state;
+	public Animator animator { get; private set; }
+	public bool isMoving;
 
 	private void Start()
 	{
 		getRangeCollider().radius = brain.GetEyesightRange(); 
+		animator = GetComponent<Animator>();
 	}
 
 	void Update()
@@ -60,6 +63,22 @@ public class EnemyController : MonoBehaviour
 		{
 			playerInRange = false;
 		}
+	}
+	
+	public void Move(Vector3 direction)
+	{
+		this.transform.position += direction;
+		MaybeFlipSprite(direction);
+	}
+
+	private void MaybeFlipSprite(Vector3 direction)
+	{ 
+		if (direction == Vector3.zero)
+		{
+			return;
+		}
+
+		GetComponent<SpriteRenderer>().flipX = direction.x < 0;	
 	}
 
 }

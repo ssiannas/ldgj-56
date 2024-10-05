@@ -51,8 +51,4 @@ public class GameControler : MonoBehaviour
         _timer += Time.deltaTime;
         score = (uint)(_timer * timeModifier);
     }
-
-
-
-
 }
