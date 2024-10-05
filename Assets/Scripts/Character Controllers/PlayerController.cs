@@ -14,7 +14,7 @@ public class PlayerController: MonoBehaviour
     public void Start()
     {
         movementController = new PlayerMovementController(this);
-        GameControler.Instance.OnGameOver += onGameOver;
+        GameController.Instance.OnGameOver += onGameOver;
     }
 
     public void FixedUpdate()
@@ -37,7 +37,7 @@ public class PlayerController: MonoBehaviour
     {
         if (collision.collider.CompareTag("Stomper"))
         {
-            GameControler.Instance.GameOver();
+            GameController.Instance.GameOver();
         }
     }
 }
