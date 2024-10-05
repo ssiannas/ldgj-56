@@ -1,5 +1,7 @@
 using System.Linq;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class EnemyController : MonoBehaviour
 
 	[SerializeField] EnemyBrain brain;
 	public State state;
+	public List<Vector2> patrolPoints { get; private set; } = new List<Vector2>();
+	public int currentWaypointIndex ; 
 
 	private void Start()
 	{
