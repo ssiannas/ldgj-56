@@ -15,6 +15,7 @@ public class StomperBrain : EnemyBrain
 	private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
 	[SerializeField] private float stomperEyesightRange = 5.5f;
 
+
 	public void OnEnable()
 	{
 		obstacleLayer = COLLISIONS_LAYER_MASK;
@@ -35,15 +36,35 @@ public class StomperBrain : EnemyBrain
 		switch (entity.state)
 		{
 			case EnemyController.State.IDLE:
+				HandleIdle(entity);
 				break;
 			case EnemyController.State.ALERT:
+				HandleAlert(entity);
 				break;
 			case EnemyController.State.CHASING:
-				MoveTowardsLastKnownPosition(entity);
+				HandleChase(entity);
 				break;
 			default:
 				break;
 		}
+	}
+
+	private void HandleChase(EnemyController entity) {
+        if (!entity.isMoving)
+        {
+			entity.isMoving = true;
+        }
+        entity.animator?.SetBool("isChasing", true);
+		MoveTowardsLastKnownPosition(entity);
+	}
+
+	private void HandleAlert(EnemyController entity) 
+	{
+	}
+
+	private void HandleIdle(EnemyController entity) 
+	{
+		return;
 	}
 
 	private void ShootRayTowardsPlayer(EnemyController entity)
@@ -66,7 +87,7 @@ public class StomperBrain : EnemyBrain
 	{
 		Transform entityTransform = entity.transform;
 		Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position).normalized;
-		entityTransform.position += (Vector3)(directionToTarget * moveSpeed * Time.deltaTime);
+		entity.Move((Vector3)(directionToTarget * moveSpeed * Time.deltaTime));
 
 		if (Vector2.Distance(entityTransform.position, lastKnownPosition) < 0.1f) // Adjust the threshold as needed
 		{
@@ -75,10 +96,24 @@ public class StomperBrain : EnemyBrain
 		}
 	}
 
+
+	// State handling
 	private void StopChase(EnemyController entity)
 	{
-		entity.state = EnemyController.State.ALERT;
+		StateMoveToAlert(entity);
+		entity.animator?.SetBool("isChasing", false);
 		// Maybe init timer to go back to IDLE state
 	}
+	
+	private void StateMoveToAlert(EnemyController entity)
+	{
+		entity.state = EnemyController.State.ALERT;
+	}
 
+	private void StateMoveToIdle(EnemyController entity)
+	{
+		entity.state = EnemyController.State.IDLE;
+		entity.animator?.SetBool("isWalking", false);
+		entity.isMoving = false;
+	}
 }
