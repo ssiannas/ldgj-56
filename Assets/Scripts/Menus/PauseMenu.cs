@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour
+namespace Menus
 {
-    // Start is called before the first frame update
-    void Start()
+    public class PauseMenu : MonoBehaviour
     {
+        public void ResumeButtonHandler()
+        {
+            GameControler.Instance.ResumeGame();
+        }
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        public void MusicToggleButtonHandler()
+        {
+            throw new NotImplementedException("Toggling music on/off not yet implemented");
+        }
         
+        public void QuitButtonHandler()
+        {
+            GameControler.Instance.QuitToStartMenu();
+        }
     }
 }

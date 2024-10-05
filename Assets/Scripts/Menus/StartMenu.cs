@@ -3,7 +3,6 @@ using Menus.Characters;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Menus
@@ -43,6 +42,26 @@ namespace Menus
             characterIx = (characterIx - 1) % characterChoices.Length;
             DisplayCharacter(CurrentCharacter);
             OnCharacterSelected.Invoke(CurrentCharacter);
+        }
+
+        public void StartButtonHandler()
+        {
+            GameControler.Instance.StartGame();
+        }
+
+        public void TutorialButtonHandler()
+        {
+            Managers.MenuManager.Instance.ShowTutorialMenu();
+        }
+
+        public void MusicToggleButtonHandler()
+        {
+            throw new NotImplementedException("Music toggle is not implemented yet");
+        }
+
+        public void ExitButtonHandler()
+        {
+            GameControler.Instance.ExitGame();
         }
     }
 }
