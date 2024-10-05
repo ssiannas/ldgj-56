@@ -9,6 +9,11 @@ public class PlayerController: MonoBehaviour
 
     Rigidbody2D rb;
 
+    private void Awake()
+    {
+
+        GameControler.Instance.OnGameOver += onGameOver;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -26,4 +31,17 @@ public class PlayerController: MonoBehaviour
 	{
 		rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
 	}
+
+    private void onGameOver()
+    {
+        Destroy(this.gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Stomper"))
+        {
+            GameControler.Instance.GameOver();
+        }
+    }
 }
