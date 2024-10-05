@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlgorithmsPlayground.unity
     guid: 35b1f656fca3ca3489c7f5c044df829c
+  - enabled: 1
+    path: Assets/Scenes/Start Menu.unity
+    guid: 2de513d71d129e74f9c83789ef71a3bb
   m_configObjects: {}
