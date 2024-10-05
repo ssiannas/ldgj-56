@@ -1,13 +1,25 @@
+using Menus;
+using Menus.Characters;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Managers
 {
+    /// <summary>
+    /// Use the Show and Hide methods to display or remove Menu UIs
+    ///
+    /// Use OnCharacterSelected event to add listeners for when the player selects a new character from
+    /// the Start Menu
+    /// </summary>
     public class MenuManager : MonoBehaviour
     {
         public static MenuManager Instance { get; private set; }
         [SerializeField] private GameObject startMenu;
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private GameObject tutorialMenu;
+
+        public UnityEvent<CharacterChoiceSO> OnCharacterSelected =>
+            startMenu.GetComponent<StartMenu>().OnCharacterSelected;
 
         private void Awake()
         {
@@ -18,7 +30,6 @@ namespace Managers
             else
             {
                 Instance = this;
-                DontDestroyOnLoad(this);
             }
         }
 

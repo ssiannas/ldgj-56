@@ -1,18 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Menus.Characters;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
-public class StartMenu : MonoBehaviour
+namespace Menus
 {
-    // Start is called before the first frame update
-    void Start()
+    public class StartMenu : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private CharacterChoiceSO[] characterChoices;
+        [SerializeField] private TMP_Text characterNameText;
+        [SerializeField] private Image characterImage;
+        private int characterIx = 0;
+        public CharacterChoiceSO CurrentCharacter => characterChoices[characterIx];
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField] public UnityEvent<CharacterChoiceSO> OnCharacterSelected = new();
+
+
+        private void Awake()
+        {
+            DisplayCharacter(CurrentCharacter);
+            OnCharacterSelected.Invoke(CurrentCharacter);
+        }
+
+        private void DisplayCharacter(CharacterChoiceSO character)
+        {
+            characterNameText.text = character.name;
+            characterImage.sprite = character.img;
+        }
+
+        public void ChooseNextCharacter()
+        {
+            characterIx = (characterIx + 1) % characterChoices.Length;
+            DisplayCharacter(CurrentCharacter);
+            OnCharacterSelected.Invoke(CurrentCharacter);
+        }
+
+        public void ChoosePreviousCharacter()
+        {
+            characterIx = (characterIx - 1) % characterChoices.Length;
+            DisplayCharacter(CurrentCharacter);
+            OnCharacterSelected.Invoke(CurrentCharacter);
+        }
     }
 }

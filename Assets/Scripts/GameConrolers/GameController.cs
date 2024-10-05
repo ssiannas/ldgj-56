@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Menus.Characters;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 //[RequireComponent(typeof(InterestMeterController))]
@@ -17,9 +19,14 @@ public class GameControler : MonoBehaviour
 
     public static GameControler Instance { get; private set; }
 
+    // PlayerCharacter holds the currently selected character (eg cockroach, mouse, ghost, etc)
+    // It's updated when a new character is selected in the start menu
+    [SerializeField] private CharacterChoiceSO playerCharacter;
+
 
     //*******************
     public delegate void GameOverDelegate();
+
     public event GameOverDelegate OnGameOver;
 
 
@@ -29,13 +36,21 @@ public class GameControler : MonoBehaviour
         {
             Destroy(this);
         }
+
         Instance = this;
+    }
+
+    private void SetPlayerCharacter(CharacterChoiceSO choice)
+    {
+        playerCharacter = choice;
+        Debug.Log($"Selected new character: {choice.name}");
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        //go to main menu
+        Managers.MenuManager.Instance
+            .OnCharacterSelected.AddListener(SetPlayerCharacter);
     }
 
     public void GameOver()
@@ -52,7 +67,9 @@ public class GameControler : MonoBehaviour
         score = (uint)(_timer * timeModifier);
     }
 
-
-
-
+    public void ExitGame()
+    {
+        Debug.Log("Exiting game");
+        Application.Quit(0);
+    }
 }
