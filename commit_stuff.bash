@@ -1,4 +1,5 @@
 RED='\033[0;31m'
+NC='\033[0m'
 
 git branch temp-branch
 git checkout temp-branch
@@ -8,4 +9,4 @@ git checkout main
 git fetch
 git pull origin main
 git merge temp-branch
-echo -e "${RED} NOTE: Remember to delete temp-branch after push"
+echo -e "${RED} NOTE: Remember to delete temp-branch after push ${NC}"
