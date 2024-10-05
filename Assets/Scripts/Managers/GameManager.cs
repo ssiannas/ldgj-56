@@ -19,5 +19,16 @@ namespace Managers
                 Instance = this;
             }
         }
+
+        public void StartGame()
+        {
+            Debug.Log("Start Game");
+        }
+
+        public void ExitGame()
+        {
+            Debug.Log("Exitting game");
+            Application.Quit(0);
+        }
     }
 }

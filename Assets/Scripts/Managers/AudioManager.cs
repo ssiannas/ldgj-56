@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Managers
@@ -5,6 +6,8 @@ namespace Managers
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager Instance { get; private set; }
+
+        public bool PlayMusic { get; private set; } = true;
 
         private void Awake()
         {
@@ -18,6 +21,15 @@ namespace Managers
             {
                 Instance = this;
             }
+        }
+
+        public void ToggleMusic()
+        {
+            PlayMusic = !PlayMusic;
+
+            Debug.Log("Toggle Music");
+
+            throw new NotImplementedException("Should stop playing music here");
         }
     }
 }
