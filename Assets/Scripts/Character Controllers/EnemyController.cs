@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -7,7 +8,7 @@ public class EnemyController : MonoBehaviour
 		IDLE,
 		ALERT,
 		CHASING,
-		RUNNING,
+		FLEEING,
 	}
 
 	public Transform playerTransform
@@ -23,11 +24,21 @@ public class EnemyController : MonoBehaviour
 	[SerializeField] EnemyBrain brain;
 	public State state;
 
+	private void Awake()
+	{
+		getRangeCollider().radius = brain.GetEyesightRange(); 
+	}
+
 	void Update()
 	{
 		brain.Think(this);
 	}
 	
+	CircleCollider2D getRangeCollider()
+	{
+		return GetComponents<CircleCollider2D>().Where(c => c.isTrigger).First();
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Player"))

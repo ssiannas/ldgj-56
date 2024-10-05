@@ -1,19 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StomperBrain", menuName = "ScriptableObjects/EnemyAI/StomperBrain", order = 1)]
-public class StomperBrain : EnemyBrain
+[CreateAssetMenu(fileName = "GrannyBrain", menuName = "ScriptableObjects/EnemyAI/GrannyBrain", order = 1)]
+public class GrannyBrain : EnemyBrain
 {
-
 	[SerializeField] public LayerMask obstacleLayer;
 	[SerializeField] private float moveSpeed = 4f;
 
 	private Vector2 lastKnownPosition = Vector2.zero;
 	private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
-	[SerializeField] private float stomperEyesightRange = 5.5f;
+	[SerializeField] private float grannyEyesightRange = 2.0f;
 
 	public void OnEnable()
 	{
@@ -22,7 +20,7 @@ public class StomperBrain : EnemyBrain
 
 	public override float GetEyesightRange()
 	{
-		return stomperEyesightRange;
+		return grannyEyesightRange;
 	}
 
 	public override void Think(EnemyController entity)
@@ -38,8 +36,8 @@ public class StomperBrain : EnemyBrain
 				break;
 			case EnemyController.State.ALERT:
 				break;
-			case EnemyController.State.CHASING:
-				MoveTowardsLastKnownPosition(entity);
+			case EnemyController.State.FLEEING:
+				MoveAwayFromPlayer(entity);
 				break;
 			default:
 				break;
@@ -57,18 +55,18 @@ public class StomperBrain : EnemyBrain
 			if (hit.collider != null && hit.collider.CompareTag("Player"))
 			{
 				lastKnownPosition = entity.playerTransform.position;
-				entity.state = EnemyController.State.CHASING;
+				entity.state = EnemyController.State.FLEEING;
 			}
 		}
 	} 
 
-	private void MoveTowardsLastKnownPosition(EnemyController entity)
+	private void MoveAwayFromPlayer(EnemyController entity)
 	{
 		Transform entityTransform = entity.transform;
 		Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position).normalized;
-		entityTransform.position += (Vector3)(directionToTarget * moveSpeed * Time.deltaTime);
+		entityTransform.position -= (Vector3)(directionToTarget * moveSpeed * Time.deltaTime);
 
-		if (Vector2.Distance(entityTransform.position, lastKnownPosition) < 0.1f) // Adjust the threshold as needed
+		if (Vector2.Distance(entityTransform.position, lastKnownPosition) > 2*GetEyesightRange()) // Adjust the threshold as needed
 		{
 			StopChase(entity);
 			// Maybe implement patrol system with range around LKP
