@@ -162,10 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997c1df1182439c40bc20f5037eca7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  brain: {fileID: 0}
 --- !u!58 &8528692397722759763
 CircleCollider2D:
   m_ObjectHideFlags: 0
