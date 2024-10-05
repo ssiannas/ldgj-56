@@ -7,7 +7,7 @@ namespace Menus
     {
         public void ResumeButtonHandler()
         {
-            GameControler.Instance.ResumeGame();
+            GameController.Instance.ResumeGame();
         }
         
         public void MusicToggleButtonHandler()
@@ -17,7 +17,7 @@ namespace Menus
         
         public void QuitButtonHandler()
         {
-            GameControler.Instance.QuitToStartMenu();
+            GameController.Instance.QuitToStartMenu();
         }
     }
 }

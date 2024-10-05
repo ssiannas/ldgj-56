@@ -46,7 +46,7 @@ namespace Menus
 
         public void StartButtonHandler()
         {
-            GameControler.Instance.StartGame();
+            GameController.Instance.StartGame();
         }
 
         public void TutorialButtonHandler()
@@ -61,7 +61,7 @@ namespace Menus
 
         public void ExitButtonHandler()
         {
-            GameControler.Instance.ExitGame();
+            GameController.Instance.ExitGame();
         }
     }
 }
