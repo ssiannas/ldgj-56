@@ -4,38 +4,34 @@ using UnityEngine;
 
 public class PlayerController: MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    private Vector2 direction = Vector2.zero;
-
-    Rigidbody2D rb;
-
-    private void Awake()
+    [SerializeField] public float speed
     {
+         get; private set;
+    } = 5f;
 
-        GameControler.Instance.OnGameOver += onGameOver;
-    }
-    // Start is called before the first frame update
-    void Start()
+    private PlayerMovementController movementController;
+  
+    public void Awake()
     {
-       rb = GetComponent<Rigidbody2D>();
+        movementController = new PlayerMovementController(this);
+        //GameControler.Instance.OnGameOver += onGameOver;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FixedUpdate()
     {
-		direction.x = Input.GetAxisRaw("Horizontal");
-		direction.y = Input.GetAxisRaw("Vertical");
-	}
+        movementController.OnFixedUpdate();
+    }
 
-	private void FixedUpdate()
+	public void Update()
 	{
-		rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
+        movementController.OnUpdate();
 	}
 
-    private void onGameOver()
+	private void onGameOver()
     {
         Destroy(this.gameObject);
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
