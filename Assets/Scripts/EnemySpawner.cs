@@ -7,21 +7,30 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject enemy;
     [SerializeField]
-    private EnemyBrain grannyBrain;
+    private EnemyBrain enemyBrain;
     [SerializeField]
-    private EnemyBrain stomperBrain;
-    [SerializeField]
-    private float grannySwarmerInterval = 3.5f;
-    [SerializeField]
-    private float stomperSwarmerInterval = 10.0f;
+    private float enemySwarmerInterval = 3.5f;
+
+    public static float INITIAL_SPAWNRATE = 2f;
+    public float MIN_SPAWNRATE = 0.1f;
+    public float difficultyScale = 0.01f;
+    private float currentSpawnRate = INITIAL_SPAWNRATE;
+    private float roundStart = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(spawnEnemy(grannySwarmerInterval, enemy, grannyBrain));
-        StartCoroutine(spawnEnemy(stomperSwarmerInterval, enemy, stomperBrain));
+        roundStart = Time.time;
+        StartCoroutine(spawnEnemy(currentSpawnRate, enemy, enemyBrain));
     }
 
     // Update is called once per frame
+    private void Update()
+    {
+        currentSpawnRate = INITIAL_SPAWNRATE - ((Time.time - roundStart) * difficultyScale);
+        currentSpawnRate = Mathf.Max(currentSpawnRate, MIN_SPAWNRATE);
+    }
+
     private IEnumerator spawnEnemy(float interval, GameObject enemy, EnemyBrain brain)
     {
         yield return new WaitForSeconds(interval);
