@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+	public void Init(EnemyBrain _brain, State _state)
+    {
+		brain = _brain;
+		state = _state;
+    }
+	
 	public enum State
 	{
 		IDLE,
@@ -24,7 +30,7 @@ public class EnemyController : MonoBehaviour
 	[SerializeField] EnemyBrain brain;
 	public State state;
 
-	private void Awake()
+	private void Start()
 	{
 		getRangeCollider().radius = brain.GetEyesightRange(); 
 	}
