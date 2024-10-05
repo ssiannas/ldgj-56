@@ -76,6 +76,12 @@ public class EnemyController : MonoBehaviour
 	{
 		this.transform.position += direction;
 		MaybeFlipSprite(direction);
+		MaybeWalkAnimation(direction);
+	}
+	
+	private void MaybeWalkAnimation(Vector3 direction)
+	{
+		animator.SetBool("isWalking", (direction != Vector3.zero));
 	}
 
 	private void MaybeFlipSprite(Vector3 direction)

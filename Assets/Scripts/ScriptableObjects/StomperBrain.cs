@@ -47,11 +47,7 @@ public class StomperBrain : EnemyBrain
 				HandleIdle(entity);
 				break;
 			case EnemyController.State.ALERT:
-
 				HandleAlert(entity);
-				Patrol(entity);
-				// PATROL 
-
 				break;
 			case EnemyController.State.CHASING:
 				HandleChase(entity);
@@ -72,6 +68,7 @@ public class StomperBrain : EnemyBrain
 
 	private void HandleAlert(EnemyController entity) 
 	{
+		Patrol(entity);
 	}
 
 	private void HandleIdle(EnemyController entity) 
@@ -112,19 +109,15 @@ public class StomperBrain : EnemyBrain
 	// State handling
 	private void StopChase(EnemyController entity)
 	{
-
 		StateMoveToAlert(entity);
 		entity.animator?.SetBool("isChasing", false);
-
-		entity.state = EnemyController.State.ALERT;
-		ResetPatrolPoints(entity, -1, 1);
-
-		// Maybe init timer to go back to IDLE state
 	}
 	
 	private void StateMoveToAlert(EnemyController entity)
 	{
 		entity.state = EnemyController.State.ALERT;
+		ResetPatrolPoints(entity, -1, 1);
+		// Maybe init timer to go back to IDLE state
 	}
 
 
@@ -141,7 +134,9 @@ public class StomperBrain : EnemyBrain
 		{
 			_waitCounter += Time.deltaTime;
 			if (_waitCounter < _waitTime)
+			{
 				return;
+			}
 			_waiting = false;
 		}
 
@@ -159,8 +154,8 @@ public class StomperBrain : EnemyBrain
 		}
 		else
 		{
-			entity.transform.position += (Vector3)((wp - (Vector2)entity.transform.position).normalized * moveSpeed * Time.deltaTime);
-			
+			Vector3 newDirection = (Vector3)((wp - (Vector2)entity.transform.position).normalized * moveSpeed * Time.deltaTime);
+			entity.Move(newDirection);
 		}
 	}
 

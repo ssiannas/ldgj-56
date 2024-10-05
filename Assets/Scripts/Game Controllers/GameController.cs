@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 //[RequireComponent(typeof(InterestMeterController))]
 
-public class GameControler : MonoBehaviour
+public class GameController : MonoBehaviour
 {
     //scene loading
     //score counting
@@ -17,7 +17,7 @@ public class GameControler : MonoBehaviour
     private float _timer = 0.0f;
     public float timeModifier = 1.0f;
 
-    public static GameControler Instance { get; private set; }
+    public static GameController Instance { get; private set; }
 
     // PlayerCharacter holds the currently selected character (eg cockroach, mouse, ghost, etc)
     // It's updated when a new character is selected in the start menu
