@@ -22,6 +22,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public UnityEvent OnWarmupSpray = new();
     [SerializeField] public UnityEvent OnShootSpray = new();
 
+    [field: SerializeField] public GameObject reaction { get; private set; }
+    [SerializeField] private float reactionDurationSec = 3f;
+
     public void WarmupSpray()
     {
         Debug.Log("Ramping Up spray....");
@@ -80,6 +83,14 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         brain.Think(this);
+
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                TriggerReaction();
+            }
+        }
     }
 
     CircleCollider2D getRangeCollider()
@@ -124,5 +135,19 @@ public class EnemyController : MonoBehaviour
         }
 
         GetComponent<SpriteRenderer>().flipX = direction.x < 0;
+    }
+
+    public void TriggerReaction()
+    {
+        StartCoroutine(ShowReaction());
+    }
+
+    IEnumerator ShowReaction()
+    {
+        reaction.SetActive(true); // Set the object active
+
+        yield return new WaitForSeconds(reactionDurationSec); // Wait for reactionDurationSec seconds
+
+        reaction.SetActive(false); // Set the object inactive 
     }
 }
