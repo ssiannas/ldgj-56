@@ -583,9 +583,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1397395898152505388, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1512311530577931946, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
       propertyPath: m_Name
       value: Choleras
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028413140695662838, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
       propertyPath: m_LocalPosition.x

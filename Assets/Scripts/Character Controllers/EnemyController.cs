@@ -14,9 +14,10 @@ public class EnemyController : MonoBehaviour
         state = _state;
     }
 
-    [SerializeField] private Transform OozeTransform;
+    [SerializeField] private GameObject OozeTargetPrefab;
     [SerializeField] private LineRenderer OozeTargetLine;
     [SerializeField] private GameObject OozePrefab;
+    private GameObject targetIndicator;
 
     [SerializeField] public UnityEvent OnWarmupSpray = new();
     [SerializeField] public UnityEvent OnShootSpray = new();
@@ -24,9 +25,10 @@ public class EnemyController : MonoBehaviour
     public void WarmupSpray()
     {
         Debug.Log("Ramping Up spray....");
-        OozeTransform.gameObject.SetActive(true);
-        OozeTransform.position = playerTransform.position;
+        targetIndicator = Instantiate(OozeTargetPrefab);
+        targetIndicator.transform.position = playerTransform.position;
         var startPos = Vector3.Lerp(transform.position, playerTransform.position, 0.5f);
+        OozeTargetLine.enabled = true;
         OozeTargetLine.SetPosition(0, startPos);
         OozeTargetLine.SetPosition(1, playerTransform.position);
         animator.SetBool("isSpraying", true);
@@ -39,10 +41,10 @@ public class EnemyController : MonoBehaviour
 
         // Create an Ooze object in scene
         var ooze = Instantiate(OozePrefab);
-        ooze.transform.position = OozeTransform.position;
+        ooze.transform.position = targetIndicator.transform.position;
+        Destroy(targetIndicator);
+        OozeTargetLine.enabled = false;
 
-        // Remove the spray feedback icons
-        OozeTransform.gameObject.SetActive(false);
         animator.SetBool("isSpraying", false);
         OnShootSpray.Invoke();
     }
