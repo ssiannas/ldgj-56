@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
     }
 
     private State _state = State.Playing;
-
+    private static string HOUSE_SCENE = "House1";
 
     private void Awake()
     {
@@ -50,7 +50,10 @@ public class GameController : MonoBehaviour
         }
 
         Instance = this;
-    }
+        DontDestroyOnLoad(this);
+
+		SceneManager.sceneLoaded += OnHouseSceneLoad;
+	}
 
 
     // Start is called before the first frame update
@@ -112,14 +115,19 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Starting a new game");
         Time.timeScale = 1;
-        SceneManager.LoadScene("House1");
-        if (_channel.IsAudioPlaying("MainMenuTheme"))
+        SceneManager.LoadScene(HOUSE_SCENE);
+
+    }
+
+    private void OnHouseSceneLoad(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name != HOUSE_SCENE) return;
+		if (_channel.IsAudioPlaying("MainMenuTheme"))
         {
             _channel.StopAudio("MainMenuTheme");
         }
         _channel.PlayAudio("Theme");
     }
-
     public void PauseGame()
     {
         Debug.Log("Pausing game");

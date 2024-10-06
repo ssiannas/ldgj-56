@@ -10,7 +10,7 @@ namespace Managers
 		public List<Sound> sounds;
 		[SerializeField] AudioChannel channel;
 
-		private  void Awake()
+		private void Awake()
 		{
 			channel.OnAudioRequested += Play;
 			channel.OnAudioStopped += Stop;

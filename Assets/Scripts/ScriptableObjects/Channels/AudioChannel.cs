@@ -38,6 +38,7 @@ public class AudioChannel : ScriptableObject
 
 	public bool IsAudioPlaying(string soundName)
 	{
+		if (OnIsAudioPlaying == null) { return false;  }
 		return	OnIsAudioPlaying(soundName);
 	}
 
