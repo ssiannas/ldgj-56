@@ -1311,6 +1311,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.39622498, y: 1.604836}
   m_EdgeRadius: 0
+--- !u!1001 &633441991
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1512311530577931946, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_Name
+      value: Choleras
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.580897
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.2534657
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
 --- !u!1 &664903344
 GameObject:
   m_ObjectHideFlags: 0
@@ -3440,6 +3497,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.36915588, y: 5.432335}
   m_EdgeRadius: 0
+--- !u!1001 &1519859063
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1512311530577931946, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_Name
+      value: Choleras (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.4636139
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.062805
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108946915373177374, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c8f6d0f0dc6f3947827a30531c8a49b, type: 3}
 --- !u!1 &1531394373
 GameObject:
   m_ObjectHideFlags: 0
@@ -146073,7 +146187,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
-  weight: 1
+  weight: 0.65
   sharedProfile: {fileID: 11400000, guid: 57c467babdc19fc41b64dc12f1696096, type: 2}
 --- !u!4 &2136502036
 Transform:
@@ -146170,3 +146284,5 @@ SceneRoots:
   - {fileID: 52256017}
   - {fileID: 1591049642}
   - {fileID: 2136502036}
+  - {fileID: 633441991}
+  - {fileID: 1519859063}
