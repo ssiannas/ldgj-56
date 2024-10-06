@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using System.Collections;
@@ -11,14 +12,22 @@ public class EnemyController : MonoBehaviour
         state = _state;
     }
 
+    [SerializeField] private Transform OozeTransform;
+    [SerializeField] private LineRenderer OozeTargetLine;
+
     public void WarmupSpray()
     {
         Debug.Log("Ramping Up spray....");
+        OozeTransform.gameObject.SetActive(true);
+        OozeTransform.position = playerTransform.position;
+        OozeTargetLine.SetPosition(0, transform.position);
+        OozeTargetLine.SetPosition(1, playerTransform.position);
     }
 
     public void ShootSpray()
     {
         Debug.Log("Spray!");
+        OozeTransform.gameObject.SetActive(false);
     }
 
     public enum State
