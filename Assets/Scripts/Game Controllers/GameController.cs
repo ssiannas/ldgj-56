@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     public float timeModifier = 1.0f;
 
     public static GameController Instance { get; private set; }
+    [SerializeField] private AudioChannel _channel;
 
     // PlayerCharacter holds the currently selected character (eg cockroach, mouse, ghost, etc)
     // It's updated when a new character is selected in the start menu
@@ -65,6 +66,8 @@ public class GameController : MonoBehaviour
     {
         UIManager.Instance
             .OnCharacterSelected.AddListener(SetPlayerCharacter);
+
+        _channel.PlayAudio("Theme");
     }
 
     public void GameOver()
