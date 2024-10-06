@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
     public event GameOverDelegate OnGameOver;
 
     public bool isGameOver = false;
+
     private enum State
     {
         Paused,
@@ -62,7 +63,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Managers.MenuManager.Instance
+        UIManager.Instance
             .OnCharacterSelected.AddListener(SetPlayerCharacter);
     }
 
@@ -76,11 +77,15 @@ public class GameController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        if (isGameOver) { return; }
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+
         _timer += Time.deltaTime;
         score = (uint)(_timer * timeModifier);
-        MenuManager.Instance.UpdateScore(score);
+        UIManager.Instance.UpdateScore(score);
         TryTogglePauseMenu();
     }
 
@@ -89,7 +94,7 @@ public class GameController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Start Menu") return;
 
         // Use ESC or START keys for toggling pause menu
-        if (Input.GetKeyDown(KeyCode.Escape) 
+        if (Input.GetKeyDown(KeyCode.Escape)
             || Input.GetKeyDown(KeyCode.Joystick1Button7))
         {
             switch (_state)
@@ -124,7 +129,7 @@ public class GameController : MonoBehaviour
         Debug.Log("Pausing game");
         Time.timeScale = 0;
         _state = State.Paused;
-        Managers.MenuManager.Instance.ShowPauseMenu();
+        UIManager.Instance.ShowPauseMenu();
     }
 
     public void ResumeGame()
@@ -132,7 +137,7 @@ public class GameController : MonoBehaviour
         Debug.Log("Resuming game");
         Time.timeScale = 1;
         _state = State.Playing;
-        Managers.MenuManager.Instance.HideMenu();
+        UIManager.Instance.HideMenu();
     }
 
     public void QuitToStartMenu()

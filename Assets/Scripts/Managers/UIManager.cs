@@ -12,9 +12,9 @@ namespace Managers
     /// Use OnCharacterSelected event to add listeners for when the player selects a new character from
     /// the Start Menu
     /// </summary>
-    public class MenuManager : MonoBehaviour
+    public class UIManager : MonoBehaviour
     {
-        public static MenuManager Instance { get; private set; }
+        public static UIManager Instance { get; private set; }
         [SerializeField] private GameObject startMenu;
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private GameObject tutorialMenu;
@@ -68,7 +68,12 @@ namespace Managers
 
         public void UpdateScore(float score)
         {
-            scoreBoard.GetComponent<ScoreController>().UpdateScore(score);
+            scoreBoard?.GetComponent<ScoreController>().UpdateScore(score);
+        }
+        
+        public void ShowScoreText(bool show)
+        {
+            scoreBoard.SetActive(show);
         }
     }
 }

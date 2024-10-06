@@ -51,7 +51,7 @@ namespace Menus
 
         public void TutorialButtonHandler()
         {
-            Managers.MenuManager.Instance.ShowTutorialMenu();
+            Managers.UIManager.Instance.ShowTutorialMenu();
         }
 
         public void MusicToggleButtonHandler()

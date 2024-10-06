@@ -380,6 +380,12 @@ MonoBehaviour:
   highscore: 0
   timeModifier: 1
   playerCharacter: {fileID: 11400000, guid: bcec313d6756acc4ea88a6cb76c82c04, type: 2}
+  isGameOver: 0
+--- !u!1 &1775835984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4009898966961960399, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+  m_PrefabInstance: {fileID: 6366806935045584684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1880239769
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +498,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 445896312610026179, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Name
-      value: Menus
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 561630030207831123, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_AnchorMax.y
@@ -540,6 +546,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3827536421585296188, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009898966961960399, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4629029184401593511, guid: 038580dd50cec01408eb03de92710c54, type: 3}
@@ -606,6 +616,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5978591295925950829, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: scoreBoard
+      value: 
+      objectReference: {fileID: 1775835984}
     - target: {fileID: 8401252926318554479, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
