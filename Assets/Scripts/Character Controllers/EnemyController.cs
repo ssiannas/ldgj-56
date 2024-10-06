@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
 		ALERT,
 		CHASING,
 		FLEEING,
+		ATTACKING,
 	}
 
 	public Transform playerTransform

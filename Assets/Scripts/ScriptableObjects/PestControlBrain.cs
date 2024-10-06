@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "PestControlBrain", menuName = "ScriptableObjects/EnemyAI/PestControlBrain", order = 1)]
 public class PestControlBrain : EnemyBrain
@@ -15,7 +16,7 @@ public class PestControlBrain : EnemyBrain
 	private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
 	
 	
-	[SerializeField] private float stomperEyesightRange = 5.5f;
+	[SerializeField] private float eyesightRange = 5.5f;
 
 
 
@@ -31,7 +32,7 @@ public class PestControlBrain : EnemyBrain
 
 	public override float GetEyesightRange()
 	{
-		return stomperEyesightRange;
+		return eyesightRange;
 	}
 
 	public override void Think(EnemyController entity)
@@ -52,9 +53,17 @@ public class PestControlBrain : EnemyBrain
 			case EnemyController.State.CHASING:
 				HandleChase(entity);
 				break;
+			case EnemyController.State.ATTACKING:
+				HandleAttack(entity);
+				break;
 			default:
 				break;
 		}
+	}
+
+	private void HandleAttack(EnemyController entity)
+	{
+		throw new NotImplementedException();
 	}
 
 	private void HandleChase(EnemyController entity) {
