@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
     }
 
     private State _state = State.Playing;
-    private static string HOUSE_SCENE = "House1";
+    private static string HOUSE_SCENE = "House 1 Colliders";
 
     private void Awake()
     {
