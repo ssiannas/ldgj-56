@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Menus.Characters;
 using TMPro;
 using UnityEngine;
@@ -9,7 +11,7 @@ namespace Menus
 {
     public class StartMenu : MonoBehaviour
     {
-        [SerializeField] private CharacterChoiceSO[] characterChoices;
+        [SerializeField] private List<CharacterChoiceSO> characterChoices;
         [SerializeField] private TMP_Text characterNameText;
         [SerializeField] private Image characterImage;
         private int characterIx = 0;
@@ -17,10 +19,13 @@ namespace Menus
 
         [SerializeField] public UnityEvent<CharacterChoiceSO> OnCharacterSelected = new();
 
+        [field: SerializeField] public PlayerPersistentState PersistentState { get; private set; }
 
         private void Awake()
         {
+            characterIx = characterChoices.FindIndex(x => x == PersistentState.CharacterChoice);
             DisplayCharacter(CurrentCharacter);
+            OnCharacterSelected.AddListener(character => PersistentState.CharacterChoice = character);
             OnCharacterSelected.Invoke(CurrentCharacter);
         }
 
@@ -32,14 +37,14 @@ namespace Menus
 
         public void ChooseNextCharacter()
         {
-            characterIx = (characterIx + 1) % characterChoices.Length;
+            characterIx = (characterIx + 1) % characterChoices.Count;
             DisplayCharacter(CurrentCharacter);
             OnCharacterSelected.Invoke(CurrentCharacter);
         }
 
         public void ChoosePreviousCharacter()
         {
-            characterIx = (characterIx - 1) % characterChoices.Length;
+            characterIx = (characterChoices.Count + characterIx - 1) % characterChoices.Count;
             DisplayCharacter(CurrentCharacter);
             OnCharacterSelected.Invoke(CurrentCharacter);
         }

@@ -124,7 +124,7 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Starting a new game");
         Time.timeScale = 1;
-        SceneManager.LoadScene("AlgorithmsPlayground");
+        SceneManager.LoadScene("House1");
     }
 
     public void PauseGame()
