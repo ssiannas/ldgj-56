@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8916273354620483925}
   - component: {fileID: 5082621177224098985}
   m_Layer: 0
-  m_Name: Pest Control Bisch
+  m_Name: Choleras
   m_TagString: Stomper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1512311530577931946}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.84, y: -0.48, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.43, y: 1.43, z: 1.43}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 2d0bf79ed353bcb41b0908bbfac65054, type: 3}
-  m_Color: {r: 0.5587495, g: 0.6981132, b: 0.26014596, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2e3585e122fdfb54c91be4151527a47d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -185,6 +185,12 @@ MonoBehaviour:
   OozeTransform: {fileID: 6637126584223215939}
   OozeTargetLine: {fileID: 1397395898152505388}
   OozePrefab: {fileID: 6929188272738925188, guid: 15a9476f33be8184c9ebc862b9a80525, type: 3}
+  OnWarmupSpray:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShootSpray:
+    m_PersistentCalls:
+      m_Calls: []
   brain: {fileID: 11400000, guid: d8b5839063d673a44b71162c03adac72, type: 2}
   state: 0
   isMoving: 0
@@ -226,7 +232,7 @@ Animator:
   m_GameObject: {fileID: 1512311530577931946}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 790cba77a38eb974bac7dbf130cc2ebf, type: 2}
+  m_Controller: {fileID: 9100000, guid: e77919117c50c364986c2b229e206285, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
