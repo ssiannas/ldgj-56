@@ -23,8 +23,7 @@ namespace Managers
 				source.volume = s.volume;
 				source.pitch = s.pitch;
 				source.loop = s.loop;
-				s.source = source;
-				
+				s.source = source;	
 			}
         }
 
@@ -45,5 +44,17 @@ namespace Managers
 			var s = sounds.Find(sound => sound.soundName == soundName);
 			return s.source.isPlaying;
 		}
-    }
+
+		private void OnDestroy()
+		{				
+			channel.OnAudioRequested -= Play;
+			channel.OnAudioStopped -= Stop;
+			channel.OnIsAudioPlaying = null;
+
+			foreach (var s in sounds)
+			{
+				s.source.Stop();
+			}
+		}
+	}
 }
