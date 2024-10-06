@@ -7,5 +7,7 @@ public abstract class EnemyBrain : ScriptableObject
 	public virtual void Think(EnemyController entity) {  }
 
 	public virtual float GetEyesightRange() { return 1.0f; }
+
+	public virtual void FlipColliders(EnemyController entity) { }
 }
 
