@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Menus;
 using Menus.Characters;
 using UnityEngine;
@@ -32,6 +33,7 @@ public class GameController : MonoBehaviour
 
     public event GameOverDelegate OnGameOver;
 
+    public bool isGameOver = false;
     private enum State
     {
         Paused,
@@ -67,16 +69,18 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         if (score > highscore) highscore = score;
+        isGameOver = true;
         OnGameOver?.Invoke();
     }
 
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if (isGameOver) { return; }
         _timer += Time.deltaTime;
         score = (uint)(_timer * timeModifier);
-        
+        MenuManager.Instance.UpdateScore(score);
         TryTogglePauseMenu();
     }
 

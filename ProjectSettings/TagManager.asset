@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Stomper
+  - Scoreboard
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,6 @@
 using Menus;
 using Menus.Characters;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,6 +18,7 @@ namespace Managers
         [SerializeField] private GameObject startMenu;
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private GameObject tutorialMenu;
+		[SerializeField] private GameObject scoreBoard;
 
         public UnityEvent<CharacterChoiceSO> OnCharacterSelected =>
             startMenu.GetComponent<StartMenu>().OnCharacterSelected;
@@ -31,9 +33,15 @@ namespace Managers
             {
                 Instance = this;
             }
+
         }
 
-        public void HideMenu()
+		void Start()
+		{
+           scoreBoard = GameObject.FindGameObjectWithTag("Scoreboard");
+		}
+
+		public void HideMenu()
         {
             startMenu.SetActive(false);
             pauseMenu.SetActive(false);
@@ -56,6 +64,11 @@ namespace Managers
         {
             HideMenu();
             tutorialMenu.SetActive(true);
+        }
+
+        public void UpdateScore(float score)
+        {
+            scoreBoard.GetComponent<ScoreController>().UpdateScore(score);
         }
     }
 }
