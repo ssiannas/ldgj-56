@@ -20,19 +20,19 @@ namespace Menus
             // 0 => Hide Menus
             if (Input.GetKeyDown(KeyCode.Alpha7))
             {
-                Managers.MenuManager.Instance.ShowStartMenu();
+                Managers.UIManager.Instance.ShowStartMenu();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha8))
             {
-                Managers.MenuManager.Instance.ShowPauseMenu();
+                Managers.UIManager.Instance.ShowPauseMenu();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha9))
             {
-                Managers.MenuManager.Instance.ShowTutorialMenu();
+                Managers.UIManager.Instance.ShowTutorialMenu();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha0))
             {
-                Managers.MenuManager.Instance.HideMenu();
+                Managers.UIManager.Instance.HideMenu();
             }
         }
     }
