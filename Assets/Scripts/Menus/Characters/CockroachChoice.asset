@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aade7692a0180742bf0b35dbc4237dd, type: 3}
   m_Name: CockroachChoice
   m_EditorClassIdentifier: 
-  <name>k__BackingField: cockroach
+  <name>k__BackingField: Roachy
   <img>k__BackingField: {fileID: 21300000, guid: c357bf276b49ea7458d4b19a4e6f697a, type: 3}
+  <animations>k__BackingField: {fileID: 9100000, guid: 2cf20c11e7e805247a188fc3f81f950e, type: 2}

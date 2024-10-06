@@ -375,7 +375,6 @@ MonoBehaviour:
   highscore: 0
   timeModifier: 1
   _channel: {fileID: 0}
-  playerCharacter: {fileID: 11400000, guid: bcec313d6756acc4ea88a6cb76c82c04, type: 2}
   isGameOver: 0
 --- !u!1001 &1783788123
 PrefabInstance:
@@ -429,10 +428,6 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2846055176333033327, guid: 038580dd50cec01408eb03de92710c54, type: 3}
-      propertyPath: <PersistentState>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: 7244465e384feeb4f91073af5d8c3867, type: 2}
     - target: {fileID: 3380977033066909413, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_fontAsset
       value: 

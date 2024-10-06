@@ -24,11 +24,6 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
     [SerializeField] private AudioChannel _channel;
 
-    // PlayerCharacter holds the currently selected character (eg cockroach, mouse, ghost, etc)
-    // It's updated when a new character is selected in the start menu
-    [SerializeField] private CharacterChoiceSO playerCharacter;
-
-
     //*******************
     public delegate void GameOverDelegate();
 
@@ -55,18 +50,10 @@ public class GameController : MonoBehaviour
         Instance = this;
     }
 
-    private void SetPlayerCharacter(CharacterChoiceSO choice)
-    {
-        playerCharacter = choice;
-        Debug.Log($"Selected new character: {choice.name}");
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        UIManager.Instance
-            .OnCharacterSelected.AddListener(SetPlayerCharacter);
-
         _channel.PlayAudio("Theme");
     }
 

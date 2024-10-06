@@ -1253,6 +1253,7 @@ MonoBehaviour:
   OnCharacterSelected:
     m_PersistentCalls:
       m_Calls: []
+  <PersistentState>k__BackingField: {fileID: 11400000, guid: 7244465e384feeb4f91073af5d8c3867, type: 2}
 --- !u!1 &8433035371934968239
 GameObject:
   m_ObjectHideFlags: 0
