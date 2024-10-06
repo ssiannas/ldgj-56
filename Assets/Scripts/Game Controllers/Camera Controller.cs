@@ -10,7 +10,7 @@ public class SmoothCamera2D : MonoBehaviour
 	public GameObject target;
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 		if (target)
 		{
