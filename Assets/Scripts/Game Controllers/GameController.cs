@@ -116,7 +116,6 @@ public class GameController : MonoBehaviour
         Debug.Log("Starting a new game");
         Time.timeScale = 1;
         SceneManager.LoadScene(HOUSE_SCENE);
-
     }
 
     private void OnHouseSceneLoad(Scene scene, LoadSceneMode mode)
@@ -128,6 +127,7 @@ public class GameController : MonoBehaviour
         }
         _channel.PlayAudio("Theme");
     }
+
     public void PauseGame()
     {
         Debug.Log("Pausing game");
