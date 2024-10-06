@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
     [SerializeField] private AudioChannel _channel;
 
+    [field: SerializeField] public PlayerPersistentState PlayerPersistence { get; private set; }
+
     //*******************
     public delegate void GameOverDelegate();
 
@@ -54,7 +56,10 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _channel.PlayAudio("Theme");
+        if (!PlayerPersistence.MusicMuted)
+        {
+            _channel.PlayAudio("Theme");
+        }
     }
 
     public void GameOver()

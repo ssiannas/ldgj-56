@@ -9,4 +9,5 @@ public class PlayerPersistentState : ScriptableObject
 {
     [field: SerializeField] public CharacterChoiceSO CharacterChoice { get; set; }
     [field: SerializeField] public int HighScore { get; set; } = 0;
+    [field: SerializeField] public bool MusicMuted { get; set; } = false;
 }
