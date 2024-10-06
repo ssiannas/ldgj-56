@@ -19,8 +19,6 @@ public class PestControlBrain : EnemyBrain
     [SerializeField] private float eyesightRange = 5.5f;
     [SerializeField] private float minSprayDistance = 2.5f;
     [SerializeField] private float sprayWaitTimeSec = 2f;
-    public UnityEvent OnRampUpSpray = new();
-    public UnityEvent OnShootSpray = new();
 
 
     private float _waitTime = 1f; // in seconds
