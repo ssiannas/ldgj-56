@@ -1246,6 +1246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyWitch
       objectReference: {fileID: 0}
+    - target: {fileID: 4354651023535002256, guid: e00d29f3994f86c4e92986212da70351, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
