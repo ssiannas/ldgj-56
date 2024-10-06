@@ -5,93 +5,96 @@ using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
-	public void Init(EnemyBrain _brain, State _state)
+    public void Init(EnemyBrain _brain, State _state)
     {
-		brain = _brain;
-		state = _state;
+        brain = _brain;
+        state = _state;
     }
-	
-	public enum State
-	{
-		IDLE,
-		ALERT,
-		CHASING,
-		FLEEING,
-		ATTACKING,
-	}
 
-	public Transform playerTransform
-	{
-		get; private set;
-	} = null;
+    public void WarmupSpray()
+    {
+        Debug.Log("Ramping Up spray....");
+    }
 
-	public bool playerInRange
-	{
-		get; private set;
-	} = false;
+    public void ShootSpray()
+    {
+        Debug.Log("Spray!");
+    }
 
-	[SerializeField] EnemyBrain brain;
-	public State state;
+    public enum State
+    {
+        IDLE,
+        ALERT,
+        CHASING,
+        FLEEING,
+        SPRAY_WARMUP,
+    }
 
-	public Animator animator { get; private set; }
-	public bool isMoving;
+    public Transform playerTransform { get; private set; } = null;
 
-	public List<Vector2> patrolPoints { get; private set; } = new List<Vector2>();
-	public int currentWaypointIndex ;
+    public bool playerInRange { get; private set; } = false;
 
-	private void Start()
-	{
-		getRangeCollider().radius = brain.GetEyesightRange(); 
-		animator = GetComponent<Animator>();
-	}
+    [SerializeField] EnemyBrain brain;
+    public State state;
 
-	void Update()
-	{
-		brain.Think(this);
-	}
-	
-	CircleCollider2D getRangeCollider()
-	{
-		return GetComponents<CircleCollider2D>().Where(c => c.isTrigger).First();
-	}
+    public Animator animator { get; private set; }
+    public bool isMoving;
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.CompareTag("Player"))
-		{
-			playerTransform = collision.transform;
-			playerInRange = true;
-		}
-	}
+    public List<Vector2> patrolPoints { get; private set; } = new List<Vector2>();
+    public int currentWaypointIndex;
 
-	private void OnTriggerExit2D(Collider2D collision)
-	{
-		if (collision.CompareTag("Player"))
-		{
-			playerInRange = false;
-		}
-	}
-	
-	public void Move(Vector3 direction)
-	{
-		this.transform.position += direction;
-		MaybeFlipSprite(direction);
-		MaybeWalkAnimation(direction);
-	}
-	
-	private void MaybeWalkAnimation(Vector3 direction)
-	{
-		animator.SetBool("isWalking", (direction != Vector3.zero));
-	}
+    private void Start()
+    {
+        getRangeCollider().radius = brain.GetEyesightRange();
+        animator = GetComponent<Animator>();
+    }
 
-	private void MaybeFlipSprite(Vector3 direction)
-	{ 
-		if (direction == Vector3.zero)
-		{
-			return;
-		}
+    void Update()
+    {
+        brain.Think(this);
+    }
 
-		GetComponent<SpriteRenderer>().flipX = direction.x < 0;	
-	}
+    CircleCollider2D getRangeCollider()
+    {
+        return GetComponents<CircleCollider2D>().Where(c => c.isTrigger).First();
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerTransform = collision.transform;
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+
+    public void Move(Vector3 direction)
+    {
+        this.transform.position += direction;
+        MaybeFlipSprite(direction);
+        MaybeWalkAnimation(direction);
+    }
+
+    private void MaybeWalkAnimation(Vector3 direction)
+    {
+        animator.SetBool("isWalking", (direction != Vector3.zero));
+    }
+
+    private void MaybeFlipSprite(Vector3 direction)
+    {
+        if (direction == Vector3.zero)
+        {
+            return;
+        }
+
+        GetComponent<SpriteRenderer>().flipX = direction.x < 0;
+    }
 }
