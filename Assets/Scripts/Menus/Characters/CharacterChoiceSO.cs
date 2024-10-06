@@ -10,5 +10,6 @@ namespace Menus.Characters
         [field: SerializeField] public Sprite img { get; private set; }
 
         [field: SerializeField] public AnimatorController animations { get; private set; }
+        [field: SerializeField] public AnimatorController mainMenuAnimation { get; private set; }
     }
 }

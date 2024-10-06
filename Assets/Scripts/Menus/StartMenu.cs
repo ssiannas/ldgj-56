@@ -67,7 +67,7 @@ namespace Menus
         private void DisplayCharacter(CharacterChoiceSO character)
         {
             characterNameText.text = character.name;
-            characterImage.sprite = character.img;
+            characterImage.GetComponent<Animator>().runtimeAnimatorController = character.mainMenuAnimation;
         }
 
         public void ChooseNextCharacter()
