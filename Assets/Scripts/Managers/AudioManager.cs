@@ -1,35 +1,49 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Managers
 {
     public class AudioManager : MonoBehaviour
     {
-        public static AudioManager Instance { get; private set; }
-
         public bool PlayMusic { get; private set; } = true;
+		public List<Sound> sounds;
+		[SerializeField] AudioChannel channel;
 
-        private void Awake()
-        {
-            // If there is an instance, and it's not me, delete myself.
+		private  void Awake()
+		{
+			channel.OnAudioRequested += Play;
+			channel.OnAudioStopped += Stop;
+			channel.OnIsAudioPlaying = IsPlaying;
 
-            if (Instance != null && Instance != this)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                Instance = this;
-            }
+			foreach (var s in sounds)
+			{
+				var source = gameObject.AddComponent<AudioSource>();
+				source.clip = s.clip;
+				source.volume = s.volume;
+				source.pitch = s.pitch;
+				source.loop = s.loop;
+				s.source = source;
+				
+			}
         }
 
-        public void ToggleMusic()
-        {
-            PlayMusic = !PlayMusic;
+		public void Play(string soundName)
+		{
+			var s = sounds.Find(sound => sound.soundName == soundName);
+			s.source.Play();
+		}
 
-            Debug.Log("Toggle Music");
+		public void Stop(string soundName)
+		{
+			var s = sounds.Find(sound => sound.soundName == soundName);
+			s.source.Stop();
+		}
 
-            throw new NotImplementedException("Should stop playing music here");
-        }
+		public bool IsPlaying(string soundName)
+		{
+			var s = sounds.Find(sound => sound.soundName == soundName);
+			return s.source.isPlaying;
+		}
     }
 }
