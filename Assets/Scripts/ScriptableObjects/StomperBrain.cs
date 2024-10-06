@@ -130,15 +130,6 @@ public class StomperBrain : EnemyBrain
 
 	private void Patrol(EnemyController entity)
     {
-		if (_waiting)
-		{
-			_waitCounter += Time.deltaTime;
-			if (_waitCounter < _waitTime)
-			{
-				return;
-			}
-			_waiting = false;
-		}
 
 		Vector2[] waypoints = entity.patrolPoints.ToArray();
 		int currentWaypointIndex = entity.currentWaypointIndex;
@@ -154,8 +145,9 @@ public class StomperBrain : EnemyBrain
 		}
 		else
 		{
-			Vector3 newDirection = (Vector3)((wp - (Vector2)entity.transform.position).normalized * moveSpeed * Time.deltaTime);
+			Vector3 newDirection = (Vector3)((wp - (Vector2)entity.transform.position).normalized * 0.5f* moveSpeed * Time.deltaTime);
 			entity.Move(newDirection);
+
 		}
 	}
 
@@ -165,7 +157,7 @@ public class StomperBrain : EnemyBrain
 		Vector2 currCenter = entity.transform.position;
 		entity.patrolPoints.Clear();
 		entity.patrolPoints.Add(lastKnownPosition);
-		//Add two random points (i - 1)
+		//Add two random points (i - 1)	
 		for (int i = 0; i < 3; i++)
 		{
 			Vector2 newPt = GetRandomPoint(currCenter, 3);
