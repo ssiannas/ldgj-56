@@ -14,12 +14,14 @@ public class PlayerMovementController
 	public float tauntingTimer;
 
 	private static float TAUNTING_DURATION_S = 0.5f;
+	private AudioChannel _audioChannel;
 
-	public PlayerMovementController(PlayerController playerController)
+	public PlayerMovementController(PlayerController playerController, AudioChannel ac)
 	{
 		_playerController = playerController;
 		_rb = _playerController.GetComponent<Rigidbody2D>();
 		_animator = _playerController.GetComponent<Animator>();
+		_audioChannel = ac;
 	}
 
 	private void MaybeTaunt()

@@ -51,4 +51,10 @@ MonoBehaviour:
     volume: 0.7
     pitch: 1
     loop: 1
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4fc650815e77c9344963cdf188bf4146, type: 3}
+    soundName: MainMenuTheme
+    volume: 0.7
+    pitch: 1
+    loop: 1
   channel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}

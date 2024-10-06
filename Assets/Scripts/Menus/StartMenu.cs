@@ -24,7 +24,7 @@ namespace Menus
         [field: SerializeField] public AudioChannel AudioChan { get; private set; }
         [SerializeField] private TMP_Text musicToggleText;
 
-        private void Awake()
+        private void Start()
         {
             InitElements();
         }
@@ -50,13 +50,13 @@ namespace Menus
         {
             if (PersistentState.MusicMuted)
             {
-                AudioChan.StopAudio("Theme");
+                AudioChan.StopAudio("MainMenuTheme");
             }
             else
             {
-                if (!AudioChan.IsAudioPlaying("Theme"))
+                if (!AudioChan.IsAudioPlaying("MainMenuTheme"))
                 {
-                    AudioChan.PlayAudio("Theme");
+                    AudioChan.PlayAudio("MainMenuTheme");
                 }
             }
 

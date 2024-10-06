@@ -20,6 +20,8 @@ namespace Managers
         [SerializeField] private GameObject tutorialMenu;
 		[SerializeField] private GameObject scoreBoard;
 
+        [SerializeField] private AudioChannel _audioChannel;
+
         public UnityEvent<CharacterChoiceSO> OnCharacterSelected =>
             startMenu.GetComponent<StartMenu>().OnCharacterSelected;
 
@@ -52,6 +54,10 @@ namespace Managers
         {
             HideMenu();
             startMenu.SetActive(true);
+            if (!_audioChannel.IsAudioPlaying("MainMenuTheme"))
+            {
+                _audioChannel.PlayAudio("MainMenuTheme");
+            }
         }
 
         public void ShowPauseMenu()
