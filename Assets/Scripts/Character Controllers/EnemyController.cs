@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private Transform OozeTransform;
     [SerializeField] private LineRenderer OozeTargetLine;
+    [SerializeField] private GameObject OozePrefab;
 
     public void WarmupSpray()
     {
@@ -27,6 +28,12 @@ public class EnemyController : MonoBehaviour
     public void ShootSpray()
     {
         Debug.Log("Spray!");
+        
+        // Create an Ooze object in scene
+        var ooze = Instantiate(OozePrefab);
+        ooze.transform.position = OozeTransform.position;
+
+        // Remove the spray feedback icons
         OozeTransform.gameObject.SetActive(false);
     }
 
