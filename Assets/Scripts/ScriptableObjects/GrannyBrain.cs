@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GrannyBrain", menuName = "ScriptableObjects/EnemyAI/GrannyBrain", order = 1)]
+
 public class GrannyBrain : EnemyBrain
 {
 	[SerializeField] public LayerMask obstacleLayer;
@@ -80,5 +81,4 @@ public class GrannyBrain : EnemyBrain
 		entity.state = EnemyController.State.IDLE;
 		entity.animator?.SetBool("isFleeing", false);
 	}
-
 }

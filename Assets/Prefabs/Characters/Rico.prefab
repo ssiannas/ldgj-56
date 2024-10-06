@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8390195477449045058}
   - component: {fileID: 6355660359076097144}
   - component: {fileID: 3789119977842346047}
-  - component: {fileID: 1508492229309195193}
   - component: {fileID: 3143886992083472692}
+  - component: {fileID: 2961698145942500996}
   m_Layer: 0
   m_Name: Rico
   m_TagString: Untagged
@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.06, y: -0.29, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -163,12 +163,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997c1df1182439c40bc20f5037eca7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OozeTransform: {fileID: 0}
+  OozeTargetLine: {fileID: 0}
+  OozePrefab: {fileID: 0}
+  OnWarmupSpray:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShootSpray:
+    m_PersistentCalls:
+      m_Calls: []
   brain: {fileID: 11400000, guid: 5cf54d6c8276e9f41a497b15a2d9528f, type: 2}
   state: 0
   isMoving: 0
   currentWaypointIndex: 0
---- !u!58 &1508492229309195193
-CircleCollider2D:
+--- !u!95 &3143886992083472692
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4412447687989447569}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6dd8d84c7fc49124689adc275af50004, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &2961698145942500996
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -199,27 +229,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.65
---- !u!95 &3143886992083472692
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4412447687989447569}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6dd8d84c7fc49124689adc275af50004, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Offset: {x: -0.02, y: -0.1}
+  m_Size: {x: 0.39, y: 0.89}
+  m_Direction: 0
