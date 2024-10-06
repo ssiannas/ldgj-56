@@ -18,10 +18,10 @@ MonoBehaviour:
     m_Value: 8
   intensity:
     m_OverrideState: 1
-    m_Value: 0.202
+    m_Value: 1
   response:
     m_OverrideState: 1
-    m_Value: 0.082
+    m_Value: 0.541
   texture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: -0.27
+    m_Value: -0.12
   contrast:
     m_OverrideState: 1
     m_Value: 3
@@ -64,7 +64,7 @@ MonoBehaviour:
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     m_OverrideState: 1
-    m_Value: -22
+    m_Value: 0
   saturation:
     m_OverrideState: 1
     m_Value: -100
