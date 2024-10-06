@@ -54,7 +54,6 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _channel.PlayAudio("Theme");
     }
 
     public void GameOver()
@@ -112,6 +111,11 @@ public class GameController : MonoBehaviour
         Debug.Log("Starting a new game");
         Time.timeScale = 1;
         SceneManager.LoadScene("House1");
+        if (_channel.IsAudioPlaying("MainMenuTheme"))
+        {
+            _channel.StopAudio("MainMenuTheme");
+        }
+        _channel.PlayAudio("Theme");
     }
 
     public void PauseGame()

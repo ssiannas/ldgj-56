@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [field: SerializeField] public PlayerPersistentState PersistentState { get; private set; }
 
+    [SerializeField] private AudioChannel _channel;
+
     private void Awake()
     {
         Debug.Log($"Selected Character is: {PersistentState.CharacterChoice.name}");
@@ -21,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
-        movementController = new PlayerMovementController(this);
+        movementController = new PlayerMovementController(this, _channel);
         GameController.Instance.OnGameOver += onGameOver;
     }
 
