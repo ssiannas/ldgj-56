@@ -9,19 +9,20 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private EnemyBrain enemyBrain;
     [SerializeField]
-    private float enemySwarmerInterval = 3.5f;
+    private GameObject[] spawnPoints;
 
-    public static float INITIAL_SPAWNRATE = 2f;
+    [SerializeField] private float INITIAL_SPAWNRATE = 2f;
     public float MIN_SPAWNRATE = 0.1f;
     public float difficultyScale = 0.01f;
-    private float currentSpawnRate = INITIAL_SPAWNRATE;
+    private float currentSpawnRate;
     private float roundStart = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentSpawnRate = INITIAL_SPAWNRATE;
         roundStart = Time.time;
-        StartCoroutine(spawnEnemy(currentSpawnRate, enemy, enemyBrain));
+        StartCoroutine(spawnEnemy(currentSpawnRate, enemy, enemyBrain, GetRandomSpawnPoit()));
     }
 
     // Update is called once per frame
@@ -31,11 +32,16 @@ public class EnemySpawner : MonoBehaviour
         currentSpawnRate = Mathf.Max(currentSpawnRate, MIN_SPAWNRATE);
     }
 
-    private IEnumerator spawnEnemy(float interval, GameObject enemy, EnemyBrain brain)
+    private GameObject GetRandomSpawnPoit()
+    {
+        return spawnPoints[Random.Range(0, spawnPoints.Length)];
+    }
+
+    private IEnumerator spawnEnemy(float interval, GameObject enemy, EnemyBrain brain, GameObject spawnPoint)
     {
         yield return new WaitForSeconds(interval);
-        GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(-5f, 5), Random.Range(-6f, 6), 0), Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemy, spawnPoint.transform.position, Quaternion.identity);
         newEnemy.GetComponent<EnemyController>().Init(brain, EnemyController.State.IDLE);
-        StartCoroutine(spawnEnemy(interval, newEnemy, brain));
+        StartCoroutine(spawnEnemy(interval, newEnemy, brain, GetRandomSpawnPoit()));
     }
 }

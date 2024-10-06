@@ -36,8 +36,7 @@ public class EnemyController : MonoBehaviour
 	public bool isMoving;
 
 	public List<Vector2> patrolPoints { get; private set; } = new List<Vector2>();
-	public int currentWaypointIndex ; 
-
+	public int currentWaypointIndex ;
 
 	private void Start()
 	{
