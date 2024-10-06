@@ -11,7 +11,7 @@ public class GrannyBrain : EnemyBrain
 
 	private Vector2 lastKnownPosition = Vector2.zero;
 	private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
-	[SerializeField] private float grannyEyesightRange = 2.0f;
+	[SerializeField] private float grannyEyesightRange = 1.5f;
 
 	public void OnEnable()
 	{
@@ -56,6 +56,7 @@ public class GrannyBrain : EnemyBrain
 			{
 				lastKnownPosition = entity.playerTransform.position;
 				entity.state = EnemyController.State.FLEEING;
+				entity.animator?.SetBool("isFleeing", true);
 			}
 		}
 	} 
@@ -64,19 +65,20 @@ public class GrannyBrain : EnemyBrain
 	{
 		Transform entityTransform = entity.transform;
 		Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position).normalized;
-		entityTransform.position -= (Vector3)(directionToTarget * moveSpeed * Time.deltaTime);
+		entity.Move(-(Vector3)(directionToTarget * moveSpeed * Time.deltaTime));
+
 
 		if (Vector2.Distance(entityTransform.position, lastKnownPosition) > 2*GetEyesightRange()) // Adjust the threshold as needed
 		{
-			StopChase(entity);
+			StopFleeing(entity);
 			// Maybe implement patrol system with range around LKP
 		}
 	}
 
-	private void StopChase(EnemyController entity)
+	private void StopFleeing(EnemyController entity)
 	{
-		entity.state = EnemyController.State.ALERT;
-		// Maybe init timer to go back to IDLE state
+		entity.state = EnemyController.State.IDLE;
+		entity.animator?.SetBool("isFleeing", false);
 	}
 
 }

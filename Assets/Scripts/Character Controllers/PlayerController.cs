@@ -17,11 +17,6 @@ public class PlayerController: MonoBehaviour
         GameController.Instance.OnGameOver += onGameOver;
     }
 
-    public void FixedUpdate()
-    {
-        movementController.OnFixedUpdate();
-    }
-
 	public void Update()
 	{
         movementController.OnUpdate();
