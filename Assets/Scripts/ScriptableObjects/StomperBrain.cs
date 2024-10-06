@@ -23,6 +23,11 @@ public class StomperBrain : EnemyBrain
 	private float _waitCounter = 0f;
 	private bool _waiting = false;
 
+	[SerializeField] private float _rotationSpeed;
+
+	[SerializeField] private float _obstacleCheckCircleRadius;
+	[SerializeField] private float _obstacleCheckDistance;
+
 
 	public void OnEnable()
 	{
@@ -185,6 +190,46 @@ public class StomperBrain : EnemyBrain
     {
 		return UnityEngine.Random.insideUnitCircle * radius + center;
 
+	}
+
+
+
+	private void HandleObstacles(EnemyController entity)
+	{
+	//	_obstacleAvoidanceCooldown -= Time.deltaTime;
+
+	//	var contactFilter = new ContactFilter2D();
+	//	contactFilter.SetLayerMask(obstacleLayer);
+
+	//	int numberOfCollisions = Physics2D.CircleCast(
+	//		entity.transform.position,
+	//		_obstacleCheckCircleRadius,
+	//		transform.up,
+	//		contactFilter,
+	//		_obstacleCollisions,
+	//		_obstacleCheckDistance);
+
+	//	for (int index = 0; index < numberOfCollisions; index++)
+	//	{
+	//		var obstacleCollision = _obstacleCollisions[index];
+
+	//		if (obstacleCollision.collider.gameObject == gameObject)
+	//		{
+	//			continue;
+	//		}
+
+	//		if (_obstacleAvoidanceCooldown <= 0)
+	//		{
+	//			_obstacleAvoidanceTargetDirection = obstacleCollision.normal;
+	//			_obstacleAvoidanceCooldown = 0.5f;
+	//		}
+
+	//		var targetRotation = Quaternion.LookRotation(transform.forward, _obstacleAvoidanceTargetDirection);
+	//		var rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+
+	//		_targetDirection = rotation * Vector2.up;
+	//		break;
+	//	}
 	}
 }
 
