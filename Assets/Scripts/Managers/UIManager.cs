@@ -18,7 +18,8 @@ namespace Managers
         [SerializeField] private GameObject startMenu;
         [SerializeField] private GameObject pauseMenu;
         [SerializeField] private GameObject tutorialMenu;
-		[SerializeField] private GameObject scoreBoard;
+        [SerializeField] private GameObject scoreBoard;
+        [SerializeField] private GameObject gameOverMenu;
 
         [SerializeField] private AudioChannel _audioChannel;
 
@@ -35,19 +36,19 @@ namespace Managers
             {
                 Instance = this;
             }
-
         }
 
-		void Start()
-		{
-           scoreBoard = GameObject.FindGameObjectWithTag("Scoreboard");
-		}
+        void Start()
+        {
+            scoreBoard = GameObject.FindGameObjectWithTag("Scoreboard");
+        }
 
-		public void HideMenu()
+        public void HideMenu()
         {
             startMenu.SetActive(false);
             pauseMenu.SetActive(false);
             tutorialMenu.SetActive(false);
+            gameOverMenu.SetActive(false);
         }
 
         public void ShowStartMenu()
@@ -72,11 +73,18 @@ namespace Managers
             tutorialMenu.SetActive(true);
         }
 
+        public void ShowGameOverMenu(int score, int highScore, bool isNewHighScore)
+        {
+            HideMenu();
+            gameOverMenu.SetActive(true);
+            gameOverMenu.GetComponent<GameOverMenu>().SetScore(score, highScore, isNewHighScore);
+        }
+
         public void UpdateScore(float score)
         {
             scoreBoard?.GetComponent<ScoreController>().UpdateScore(score);
         }
-        
+
         public void ShowScoreText(bool show)
         {
             scoreBoard.SetActive(show);

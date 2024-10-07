@@ -66,6 +66,12 @@ public class GameController : MonoBehaviour
         if (score > highscore) highscore = score;
         isGameOver = true;
         OnGameOver?.Invoke();
+        bool isNewHighScore = score > PlayerPersistence.HighScore;
+        if (isNewHighScore)
+        {
+            PlayerPersistence.HighScore = (int)score;
+        }
+        UIManager.Instance.ShowGameOverMenu((int)score, PlayerPersistence.HighScore, isNewHighScore);
     }
 
 
