@@ -25,6 +25,8 @@ public class EnemyController : MonoBehaviour
     [field: SerializeField] public GameObject reaction { get; private set; }
     [SerializeField] private float reactionDurationSec = 3f;
 
+    [SerializeField] private uint tauntReward = 20;
+    
     public void WarmupSpray()
     {
         Debug.Log("Ramping Up spray....");
@@ -141,6 +143,7 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} is angery!");
         StartCoroutine(ShowReaction());
+        GameController.Instance.AddScore(tauntReward);
     }
 
     IEnumerator ShowReaction()

@@ -55,6 +55,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 3295592766380007005}
   tutorialMenu: {fileID: 5997210744888873733}
   scoreBoard: {fileID: 4009898966961960399}
+  _audioChannel: {fileID: 0}
 --- !u!114 &6902588012835906426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 123'
+  m_text: 'Score: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c027f5ddad6e3d647b38af5de00daa61, type: 2}
   m_sharedMaterial: {fileID: 8246947393379487085, guid: c027f5ddad6e3d647b38af5de00daa61, type: 2}

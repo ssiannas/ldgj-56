@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioChannel _channel;
 
     [field: SerializeField] public PlayerPersistentState PlayerPersistence { get; private set; }
-
+    
     //*******************
     public delegate void GameOverDelegate();
 
@@ -52,8 +52,8 @@ public class GameController : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this);
 
-		SceneManager.sceneLoaded += OnHouseSceneLoad;
-	}
+        SceneManager.sceneLoaded += OnHouseSceneLoad;
+    }
 
 
     // Start is called before the first frame update
@@ -77,10 +77,16 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        _timer += Time.deltaTime;
-        score = (uint)(_timer * timeModifier);
-        UIManager.Instance.UpdateScore(score);
+        // _timer += Time.deltaTime;
+        // score = (uint)(_timer * timeModifier);
+        // UIManager.Instance.UpdateScore(score);
         TryTogglePauseMenu();
+    }
+
+    public void AddScore(uint points)
+    {
+        score += points;
+        UIManager.Instance.UpdateScore(score);
     }
 
     private void TryTogglePauseMenu()
@@ -121,11 +127,16 @@ public class GameController : MonoBehaviour
     private void OnHouseSceneLoad(Scene scene, LoadSceneMode mode)
     {
         if (scene.name != HOUSE_SCENE) return;
-		if (_channel.IsAudioPlaying("MainMenuTheme"))
+        if (_channel.IsAudioPlaying("MainMenuTheme"))
         {
             _channel.StopAudio("MainMenuTheme");
         }
+
         _channel.PlayAudio("Theme");
+        
+        // Reset score
+        score = 0;
+        UIManager.Instance.UpdateScore(score);
     }
 
     public void PauseGame()
