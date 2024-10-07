@@ -15,6 +15,8 @@ public class GrannyBrain : EnemyBrain
 	[SerializeField] private float grannyEyesightRange = 1.5f;
 
 	[SerializeField] private AudioChannel _audioChannel;
+	
+	private System.Random _random = new System.Random();
 
 	public void OnEnable()
 	{
@@ -26,6 +28,10 @@ public class GrannyBrain : EnemyBrain
 		return grannyEyesightRange;
 	}
 
+	public Sound GetRandomScream() { 
+		return enemySounds[_random.Next(0, enemySounds.Count -1)];
+	}
+		 
 	public override void Think(EnemyController entity)
 	{
 		if (entity.playerInRange)
@@ -68,12 +74,8 @@ public class GrannyBrain : EnemyBrain
 		if (entity.state == EnemyController.State.FLEEING) return;
 		entity.state = EnemyController.State.FLEEING;
 		entity.animator?.SetBool("isFleeing", true);
-		if (_audioChannel.IsAudioPlaying(entity.Scream)) {
-			_audioChannel.PlayAudio(entity.GetNextScream());
-		} else
-		{
-			_audioChannel.PlayAudio(entity.Scream);
-		}
+		entity.PlayScream();
+		
 	}
 
 

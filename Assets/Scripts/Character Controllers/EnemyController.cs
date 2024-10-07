@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
@@ -29,17 +31,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private uint proximityRewardPerSec = 10;
     [SerializeField] private float proximityRewardDistance = 4f;
     private float proximityRewardTimer = 0;
-
-    private static string[] Screams =
-    {
-        "Scream1",
-        "Scream2",
-        "Scream3",
-        "Scream4"
-    };
-    private System.Random rng = new System.Random();
-    public string Scream;
-
     public void WarmupSpray()
     {
         Debug.Log("Ramping Up spray....");
@@ -95,17 +86,47 @@ public class EnemyController : MonoBehaviour
     public List<Vector2> patrolPoints { get; private set; } = new List<Vector2>();
     public int currentWaypointIndex;
 
+    private AudioSource enemyAudioEffects;
+    public Sound scream;
+    private Sound fxPlaying;
+
     private void Start()
-    {
-        Scream = Screams[rng.Next(0, Screams.Length-1)];
-        getRangeCollider().radius = brain.GetEyesightRange();
+    {   
+        enemyAudioEffects = gameObject.AddComponent<AudioSource>();
+		getRangeCollider().radius = brain.GetEyesightRange();
         animator = GetComponent<Animator>();
+        // HUGE HACK!!!
+        if (brain.GetType() == typeof(GrannyBrain))
+        {
+            scream = ((GrannyBrain)brain).GetRandomScream();
+        }
     }
 
-    public string GetNextScream()
+    public void PlayAudio(Sound s, float startTime = 0)
     {
-        Scream = Screams[Array.FindIndex(Screams, s => s == Scream) + 1 % Screams.Length];
-        return Scream;
+        if (s == null) return;
+        fxPlaying = s;
+        enemyAudioEffects.pitch = s.pitch;
+        enemyAudioEffects.name = s.soundName;
+        enemyAudioEffects.time = startTime;
+        enemyAudioEffects.PlayOneShot(s.clip, s.volume);
+        s.source = enemyAudioEffects;
+    }
+
+    public void StopAudio(Sound s)
+    {
+        if (s == null) return;
+        if (fxPlaying == null) return;
+        if (fxPlaying.soundName == s.soundName)
+        {
+            fxPlaying = null;
+            enemyAudioEffects.Stop();
+        }
+    }
+
+    public void PlayScream()
+    {
+        PlayAudio(scream);
     }
 
     void Update()
@@ -173,7 +194,7 @@ public class EnemyController : MonoBehaviour
         MaybeWalkAnimation(direction);
     }
 
-
+    
     private void MaybeWalkAnimation(Vector3 direction)
     {
         animator.SetBool("isWalking", (direction != Vector3.zero));
