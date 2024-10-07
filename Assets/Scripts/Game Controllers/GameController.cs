@@ -41,8 +41,10 @@ public class GameController : MonoBehaviour
 
     private State _state = State.Playing;
     private static string HOUSE_SCENE = "House 1 Colliders";
+    private static string MAIN_MENU_SCENE = "Start Menu";
 
-    private void Awake()
+
+	private void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -126,13 +128,17 @@ public class GameController : MonoBehaviour
 
     private void OnHouseSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name != HOUSE_SCENE) return;
+        if (scene.name == MAIN_MENU_SCENE) return;
+
         if (_channel.IsAudioPlaying("MainMenuTheme"))
         {
             _channel.StopAudio("MainMenuTheme");
         }
 
-        _channel.PlayAudio("Theme");
+        if (!PlayerPersistence.MusicMuted)
+        {
+            _channel.PlayAudio("Theme");
+        }
         
         // Reset score
         score = 0;
