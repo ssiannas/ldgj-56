@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void onGameOver()
     {
+        _channel.PlayAudio("Splat");
         Destroy(this.gameObject);
     }
 
