@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private uint proximityRewardPerSec = 10;
     [SerializeField] private float proximityRewardDistance = 4f;
     private float proximityRewardTimer = 0;
+
+
 
     public void WarmupSpray()
     {
@@ -74,6 +77,11 @@ public class EnemyController : MonoBehaviour
     [Header("AI Settings")]
     [SerializeField] EnemyBrain brain;
     public State state;
+    [field: SerializeField] public float _rotationSpeed { get; private set; }
+    [field: SerializeField] public float _obstacleCheckCircleRadius { get; private set; }
+    [field: SerializeField] public float _obstacleCheckDistance { get; private set; }
+
+
 
     public Animator animator { get; private set; }
     public bool isMoving;
@@ -152,6 +160,7 @@ public class EnemyController : MonoBehaviour
         MaybeWalkAnimation(direction);
     }
 
+
     private void MaybeWalkAnimation(Vector3 direction)
     {
         animator.SetBool("isWalking", (direction != Vector3.zero));
@@ -182,4 +191,5 @@ public class EnemyController : MonoBehaviour
 
         reaction.SetActive(false); // Set the object inactive 
     }
+   
 }
