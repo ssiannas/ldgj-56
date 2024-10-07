@@ -82,7 +82,7 @@ public class PlayerMovementController
         // Show taunt indicator
         _playerController.TauntIndicator.SetActive(true);
         _playerController.TauntIndicator.transform.localScale =
-            new Vector3(_playerController.TauntRadius, _playerController.TauntRadius, 1);
+            new Vector3(_playerController.TauntRadius, _playerController.TauntRadius, 1) * 1.1f;
 
         // Taunt enemies
         Debug.Log($"TauntRadius = {_playerController.TauntRadius}");
