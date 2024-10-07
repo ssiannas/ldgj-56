@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -19,8 +15,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Debug.Log($"Selected Character is: {PersistentState.CharacterChoice.name}");
-        var animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = PersistentState.CharacterChoice.animations;
+        var runtimeAnimatorController = GetComponent<RuntimeAnimatorController>();
+        runtimeAnimatorController = PersistentState.CharacterChoice.animations;
     }
 
     public void Start()

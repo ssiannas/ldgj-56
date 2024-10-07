@@ -1,4 +1,3 @@
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Menus.Characters
@@ -9,7 +8,7 @@ namespace Menus.Characters
         [field: SerializeField] public string name { get; private set; }
         [field: SerializeField] public Sprite img { get; private set; }
 
-        [field: SerializeField] public AnimatorController animations { get; private set; }
-        [field: SerializeField] public AnimatorController mainMenuAnimation { get; private set; }
+        [field: SerializeField] public RuntimeAnimatorController animations { get; private set; }
+        [field: SerializeField] public RuntimeAnimatorController mainMenuAnimation { get; private set; }
     }
 }
