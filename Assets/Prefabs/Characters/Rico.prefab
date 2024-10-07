@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2961698145942500996}
   m_Layer: 7
   m_Name: Rico
-  m_TagString: Untagged
+  m_TagString: Stomper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,6 +180,9 @@ MonoBehaviour:
   proximityRewardDistance: 4
   brain: {fileID: 11400000, guid: 5cf54d6c8276e9f41a497b15a2d9528f, type: 2}
   state: 0
+  <_rotationSpeed>k__BackingField: 0
+  <_obstacleCheckCircleRadius>k__BackingField: 0
+  <_obstacleCheckDistance>k__BackingField: 0
   isMoving: 0
   currentWaypointIndex: 0
 --- !u!95 &3143886992083472692
