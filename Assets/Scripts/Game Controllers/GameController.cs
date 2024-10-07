@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
 
 	private void Awake()
     {
+        highscore = (uint)PlayerPrefs.GetInt("Highscore", 0);
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -66,6 +67,7 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         if (score > highscore) highscore = score;
+        PlayerPrefs.SetInt("Highscore", (int)score);
         isGameOver = true;
         OnGameOver?.Invoke();
     }
@@ -88,7 +90,8 @@ public class GameController : MonoBehaviour
     public void AddScore(uint points)
     {
         score += points;
-        UIManager.Instance.UpdateScore(score);
+        if (highscore > score) highscore = score;
+        UIManager.Instance.UpdateScore(score, (int)highscore);
     }
 
     private void TryTogglePauseMenu()

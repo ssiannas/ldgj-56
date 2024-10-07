@@ -72,9 +72,9 @@ namespace Managers
             tutorialMenu.SetActive(true);
         }
 
-        public void UpdateScore(float score)
+        public void UpdateScore(float score, int highscore)
         {
-            scoreBoard?.GetComponent<ScoreController>().UpdateScore(score);
+            scoreBoard?.GetComponent<ScoreController>().UpdateScore(score, highscore);
         }
         
         public void ShowScoreText(bool show)

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a7522498fdaca4ab563552412bd998, type: 3}
   m_Name: PlayerPersistentState
   m_EditorClassIdentifier: 
-  <CharacterChoice>k__BackingField: {fileID: 11400000, guid: bcec313d6756acc4ea88a6cb76c82c04, type: 2}
+  <CharacterChoice>k__BackingField: {fileID: 11400000, guid: f7cad1527d7ee7a43ac55f499c7e2be5, type: 2}
   <HighScore>k__BackingField: 0
+  <MusicMuted>k__BackingField: 0

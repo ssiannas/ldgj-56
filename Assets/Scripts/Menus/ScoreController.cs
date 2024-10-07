@@ -8,12 +8,13 @@ public class ScoreController : MonoBehaviour
 
     private TextMeshProUGUI text;
     private static string TEXT_HEADER = "Score: ";
+    private static string HIGHSCORE_HEADER = "Highscore: ";
 
     // Start is called before the first frame update
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
-        UpdateScore(0);
+        UpdateScore(0, PlayerPrefs.GetInt("Highscore", 0));
     }
 
     // Update is called once per frame
@@ -22,8 +23,8 @@ public class ScoreController : MonoBehaviour
         
     }
 
-    public void UpdateScore(float score)
+    public void UpdateScore(float score, int highscore)
     {
-        text.SetText(TEXT_HEADER + score.ToString());
+        text.SetText($"{TEXT_HEADER}{score}");
     }
 }
