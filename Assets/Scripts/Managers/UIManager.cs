@@ -81,9 +81,9 @@ namespace Managers
             gameOverMenu.GetComponent<GameOverMenu>().SetScore(score, highScore, isNewHighScore);
         }
         
-        public void UpdateScore(float score, int highscore)
+        public void UpdateScore(float score)
         {
-            scoreBoard?.GetComponent<ScoreController>().UpdateScore(score, highscore);
+            scoreBoard?.GetComponent<ScoreController>().UpdateScore(score);
         }
 
         public void ShowScoreText(bool show)
