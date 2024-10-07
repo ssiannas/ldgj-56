@@ -14,19 +14,23 @@ public class EnemyController : MonoBehaviour
         state = _state;
     }
 
+    [Header("Choleras Settings")]
     [SerializeField] private GameObject OozeTargetPrefab;
     [SerializeField] private LineRenderer OozeTargetLine;
     [SerializeField] private GameObject OozePrefab;
     private GameObject targetIndicator;
-
     [SerializeField] public UnityEvent OnWarmupSpray = new();
     [SerializeField] public UnityEvent OnShootSpray = new();
 
     [field: SerializeField] public GameObject reaction { get; private set; }
     [SerializeField] private float reactionDurationSec = 3f;
 
+    [Header("Reward Settings")]
     [SerializeField] private uint tauntReward = 20;
-    
+    [SerializeField] private uint proximityRewardPerSec = 10;
+    [SerializeField] private float proximityRewardDistance = 4f;
+    private float proximityRewardTimer = 0;
+
     public void WarmupSpray()
     {
         Debug.Log("Ramping Up spray....");
@@ -67,6 +71,7 @@ public class EnemyController : MonoBehaviour
 
     public bool playerInRange { get; private set; } = false;
 
+    [Header("AI Settings")]
     [SerializeField] EnemyBrain brain;
     public State state;
 
@@ -93,6 +98,28 @@ public class EnemyController : MonoBehaviour
                 TriggerReaction();
             }
         }
+
+        if (playerTransform)
+        {
+            TryProximityRewardPlayer();
+        }
+    }
+
+    private void TryProximityRewardPlayer()
+    {
+        var distance = Vector3.Distance(transform.position, playerTransform.position);
+        var hits = Physics2D.LinecastAll(transform.position,
+            playerTransform.position,
+            LayerMask.GetMask("Collisions"));
+        var canSeePlayer = hits.All(hit => hit.collider.CompareTag("Player"));
+
+        if (!(distance < proximityRewardDistance) || !canSeePlayer) return;
+
+        proximityRewardTimer += Time.deltaTime;
+        if (proximityRewardTimer < 1f) return;
+
+        GameController.Instance.AddScore(proximityRewardPerSec);
+        proximityRewardTimer = 0;
     }
 
     CircleCollider2D getRangeCollider()
@@ -106,6 +133,7 @@ public class EnemyController : MonoBehaviour
         {
             playerTransform = collision.transform;
             playerInRange = true;
+            proximityRewardTimer = 0;
         }
     }
 
