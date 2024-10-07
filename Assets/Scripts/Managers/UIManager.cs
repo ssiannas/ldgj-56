@@ -23,6 +23,8 @@ namespace Managers
 
         [SerializeField] private AudioChannel _audioChannel;
 
+        [field: SerializeField] public PlayerPersistentState PlayerPersistence { get; private set; }
+
         public UnityEvent<CharacterChoiceSO> OnCharacterSelected =>
             startMenu.GetComponent<StartMenu>().OnCharacterSelected;
 
@@ -36,7 +38,6 @@ namespace Managers
             {
                 Instance = this;
             }
-
         }
 
         void Start()
@@ -56,7 +57,7 @@ namespace Managers
         {
             HideMenu();
             startMenu.SetActive(true);
-            if (!_audioChannel.IsAudioPlaying("MainMenuTheme"))
+            if (!PlayerPersistence.MusicMuted && !_audioChannel.IsAudioPlaying("MainMenuTheme"))
             {
                 _audioChannel.PlayAudio("MainMenuTheme");
             }
@@ -80,7 +81,7 @@ namespace Managers
             gameOverMenu.SetActive(true);
             gameOverMenu.GetComponent<GameOverMenu>().SetScore(score, highScore, isNewHighScore);
         }
-        
+
         public void UpdateScore(float score)
         {
             scoreBoard?.GetComponent<ScoreController>().UpdateScore(score);

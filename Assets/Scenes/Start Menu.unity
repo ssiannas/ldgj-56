@@ -744,6 +744,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1427778379791000543, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1486991176912462549, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -851,6 +855,14 @@ PrefabInstance:
     - target: {fileID: 3315656462148018760, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360783902074730372, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 107.61597
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439636024155477356, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 107.61597
       objectReference: {fileID: 0}
     - target: {fileID: 3446985856312616350, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Layer
@@ -981,6 +993,14 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5499140971687217298, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499140971687217298, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5499140971687217298, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
@@ -1020,10 +1040,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5978591295925950829, guid: 038580dd50cec01408eb03de92710c54, type: 3}
-      propertyPath: _audioChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
     - target: {fileID: 5997210744888873733, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Layer
       value: 5

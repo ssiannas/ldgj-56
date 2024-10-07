@@ -57,6 +57,7 @@ MonoBehaviour:
   scoreBoard: {fileID: 4009898966961960399}
   gameOverMenu: {fileID: 1275243761229696689}
   _audioChannel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
+  <PlayerPersistence>k__BackingField: {fileID: 11400000, guid: 7244465e384feeb4f91073af5d8c3867, type: 2}
 --- !u!114 &6902588012835906426
 MonoBehaviour:
   m_ObjectHideFlags: 0

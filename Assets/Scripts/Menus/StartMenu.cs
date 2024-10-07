@@ -27,11 +27,6 @@ namespace Menus
             InitElements();
         }
 
-        private void OnEnable()
-        {
-            InitElements();
-        }
-
         private void InitElements()
         {
             // Character Select init
