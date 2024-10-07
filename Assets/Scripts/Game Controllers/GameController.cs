@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Managers;
 using Menus;
 using Menus.Characters;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
-
 
 //[RequireComponent(typeof(InterestMeterController))]
 
@@ -24,6 +24,10 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
     [SerializeField] private AudioChannel _channel;
 
+#if UNITY_WEBGL
+    [DllImport("__Internal")]
+	private static extern void JS_FileSystem_Sync();
+#endif
     [field: SerializeField] public PlayerPersistentState PlayerPersistence { get; private set; }
     
     //*******************
@@ -68,6 +72,9 @@ public class GameController : MonoBehaviour
     {
         if (score > highscore) highscore = score;
         PlayerPrefs.SetInt("Highscore", (int)score);
+#if UNITY_WEBGL
+        JS_FileSystem_Sync();
+#endif
         isGameOver = true;
         OnGameOver?.Invoke();
     }
@@ -91,7 +98,7 @@ public class GameController : MonoBehaviour
     {
         score += points;
         if (highscore > score) highscore = score;
-        UIManager.Instance.UpdateScore(score, (int)highscore);
+        UIManager.Instance.UpdateScore(score);
     }
 
     private void TryTogglePauseMenu()
