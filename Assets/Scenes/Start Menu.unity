@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &117122696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1427778379791000543, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+  m_PrefabInstance: {fileID: 810880792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &180205921
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +162,11 @@ RectTransform:
   m_AnchoredPosition: {x: 289, y: -118}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &198423506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7666730502005039641, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+  m_PrefabInstance: {fileID: 810880792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &402676864
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 1920, y: 1200.062}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &597764616
@@ -820,6 +830,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1816304711614248206, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_text
+      value: Pest Control
+      objectReference: {fileID: 0}
+    - target: {fileID: 1816304711614248206, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -1047,6 +1061,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5499140971687217298, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5760600171438918979, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -1090,6 +1108,10 @@ PrefabInstance:
     - target: {fileID: 5997210744888873733, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997210744888873733, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6286475579236681526, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_Layer
@@ -1239,8 +1261,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8824277794432027734, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: PlayerSlide
+      value: 
+      objectReference: {fileID: 198423506}
+    - target: {fileID: 8824277794432027734, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: EnemiesSlide
+      value: 
+      objectReference: {fileID: 939460889}
+    - target: {fileID: 8824277794432027734, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+      propertyPath: ObjectiveSlide
+      value: 
+      objectReference: {fileID: 117122696}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2179885056198431189, guid: 038580dd50cec01408eb03de92710c54, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3315656462148018760, guid: 038580dd50cec01408eb03de92710c54, type: 3}
@@ -1289,7 +1324,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 132, y: 160}
   m_SizeDelta: {x: 499.99994, y: 300}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &843584301
@@ -1360,6 +1395,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &939460889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5651606345624841580, guid: 038580dd50cec01408eb03de92710c54, type: 3}
+  m_PrefabInstance: {fileID: 810880792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1193984968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,8 +1747,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 597764615}
-  - {fileID: 810880793}
   - {fileID: 843584300}
+  - {fileID: 810880793}
   - {fileID: 180205922}
   - {fileID: 1427876920}
   - {fileID: 425126729}
