@@ -57,4 +57,10 @@ MonoBehaviour:
     volume: 0.7
     pitch: 1
     loop: 1
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: de2fc06fd33264844a7294a74883d0fa, type: 3}
+    soundName: Walking
+    volume: 0.476
+    pitch: 1.09
+    loop: 1
   channel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
