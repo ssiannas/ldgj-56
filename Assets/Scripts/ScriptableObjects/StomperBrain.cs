@@ -96,10 +96,18 @@ public class StomperBrain : EnemyBrain
 			if (hit.collider != null && hit.collider.CompareTag("Player"))
 			{
 				lastKnownPosition = entity.playerTransform.position;
-				entity.state = EnemyController.State.CHASING;
+				StateMoveToChase(entity);
 			}
 		}
 	} 
+
+	private void StateMoveToChase(EnemyController entity)
+	{
+		if (entity.state == EnemyController.State.CHASING) return;
+		entity.state = EnemyController.State.CHASING;
+		var witchClip = enemySounds.Find(s => s.soundName == "WitchChase");
+		entity.PlayAudio(witchClip,  UnityEngine.Random.Range(0, witchClip.clip.length));
+	}
 
 	private void MoveTowardsLastKnownPosition(EnemyController entity)
 	{
@@ -125,6 +133,7 @@ public class StomperBrain : EnemyBrain
 	{
 		StateMoveToAlert(entity);
 		entity.animator?.SetBool("isChasing", false);
+		entity.StopAudio(enemySounds.Find(s => s.soundName == "WitchChase"));
 	}
 	
 	private void StateMoveToAlert(EnemyController entity)

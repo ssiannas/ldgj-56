@@ -12,8 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758df8c8fc785f44c9fd3d3b65805cf9, type: 3}
   m_Name: GrannyBrain
   m_EditorClassIdentifier: 
+  enemySounds:
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 3596b4e8285807a40b8c9d5788b751b2, type: 3}
+    soundName: Scream1
+    volume: 0.419
+    pitch: 1.518
+    loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5e62b4c4e12e14b47b98970cd0938680, type: 3}
+    soundName: Scream1
+    volume: 0.471
+    pitch: 1.229
+    loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 84a75e26e7eb67640a387895d33ce917, type: 3}
+    soundName: Scream1
+    volume: 0.512
+    pitch: 1.493
+    loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 3fce66e853a8db64cafb8fadd516f48c, type: 3}
+    soundName: Scream1
+    volume: 0.554
+    pitch: 1.462
+    loop: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
   moveSpeed: 4
   grannyEyesightRange: 4.07
+  _audioChannel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}

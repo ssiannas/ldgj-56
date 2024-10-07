@@ -14,6 +14,10 @@ public class GrannyBrain : EnemyBrain
 	private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
 	[SerializeField] private float grannyEyesightRange = 1.5f;
 
+	[SerializeField] private AudioChannel _audioChannel;
+	
+	private System.Random _random = new System.Random();
+
 	public void OnEnable()
 	{
 		obstacleLayer = COLLISIONS_LAYER_MASK;
@@ -24,6 +28,10 @@ public class GrannyBrain : EnemyBrain
 		return grannyEyesightRange;
 	}
 
+	public Sound GetRandomScream() { 
+		return enemySounds[_random.Next(0, enemySounds.Count -1)];
+	}
+		 
 	public override void Think(EnemyController entity)
 	{
 		if (entity.playerInRange)
@@ -56,11 +64,21 @@ public class GrannyBrain : EnemyBrain
 			if (hit.collider != null && hit.collider.CompareTag("Player"))
 			{
 				lastKnownPosition = entity.playerTransform.position;
-				entity.state = EnemyController.State.FLEEING;
-				entity.animator?.SetBool("isFleeing", true);
+				MoveStateToFleeing(entity);
 			}
 		}
 	} 
+	
+	private void MoveStateToFleeing(EnemyController entity)
+	{
+		if (entity.state == EnemyController.State.FLEEING) return;
+		entity.state = EnemyController.State.FLEEING;
+		entity.animator?.SetBool("isFleeing", true);
+		entity.PlayScream();
+		
+	}
+
+
 
 	private void MoveAwayFromPlayer(EnemyController entity)
 	{
