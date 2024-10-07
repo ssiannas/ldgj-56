@@ -19,9 +19,4 @@ MonoBehaviour:
   eyesightRange: 5.5
   minSprayDistance: 2
   sprayWaitTimeSec: 1
-  OnRampUpSpray:
-    m_PersistentCalls:
-      m_Calls: []
-  OnShootSpray:
-    m_PersistentCalls:
-      m_Calls: []
+  _audioChannel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
