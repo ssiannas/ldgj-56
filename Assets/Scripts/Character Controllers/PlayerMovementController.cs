@@ -48,18 +48,17 @@ public class PlayerMovementController
 
     private void MaybePlayWalkAudio(bool isWalking)
     {
-		bool isWalkAudioPlaying = _audioChannel.IsAudioPlaying("Walking");
-		// TODO: Change with persistence
-		if (isWalking  && !isWalkAudioPlaying)
-		{
-           _audioChannel.PlayAudio("Walking");
-           
-		}
+        bool isWalkAudioPlaying = _audioChannel.IsAudioPlaying("Walking");
+        // TODO: Change with persistence
+        if (isWalking && !isWalkAudioPlaying)
+        {
+            _audioChannel.PlayAudio("Walking");
+        }
         else if (!isWalking && isWalkAudioPlaying)
         {
             _audioChannel.StopAudio("Walking");
-		}
-	}
+        }
+    }
 
     public void OnUpdate()
     {
@@ -79,6 +78,11 @@ public class PlayerMovementController
         isTaunting = true;
         tauntingTimer = TAUNTING_DURATION_S;
         MaybePlayTauntAnimation();
+
+        // Show taunt indicator
+        _playerController.TauntIndicator.SetActive(true);
+        _playerController.TauntIndicator.transform.localScale =
+            new Vector3(_playerController.TauntRadius, _playerController.TauntRadius, 1);
 
         // Taunt enemies
         Debug.Log($"TauntRadius = {_playerController.TauntRadius}");
@@ -117,6 +121,7 @@ public class PlayerMovementController
     {
         isTaunting = false;
         MaybePlayTauntAnimation();
+        _playerController.TauntIndicator.SetActive(false);
     }
 
     private void MaybePlayTauntAnimation()

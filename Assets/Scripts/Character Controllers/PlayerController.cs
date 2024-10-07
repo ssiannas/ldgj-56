@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [field: SerializeField] public float TauntRadius { get; private set; } = 4f;
 
+    [field: SerializeField] public GameObject TauntIndicator { get; private set; }
+
     private void Awake()
     {
         Debug.Log($"Selected Character is: {PersistentState.CharacterChoice.name}");
