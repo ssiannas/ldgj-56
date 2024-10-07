@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3389950923c3c684497c055ba10e61f5, type: 3}
   m_Name: StomperBrain
   m_EditorClassIdentifier: 
-  eyesightRange: 5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  moveSpeed: 4
+  moveSpeed: 3.25
+  stomperEyesightRange: 5.5
