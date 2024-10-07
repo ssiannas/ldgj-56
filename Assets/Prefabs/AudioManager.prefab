@@ -75,4 +75,28 @@ MonoBehaviour:
     volume: 0.6
     pitch: 1
     loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 3596b4e8285807a40b8c9d5788b751b2, type: 3}
+    soundName: Scream1
+    volume: 0.441
+    pitch: 1.549
+    loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5e62b4c4e12e14b47b98970cd0938680, type: 3}
+    soundName: Scream2
+    volume: 0.395
+    pitch: 1.511
+    loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 84a75e26e7eb67640a387895d33ce917, type: 3}
+    soundName: Scream3
+    volume: 0.441
+    pitch: 1.253
+    loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 3fce66e853a8db64cafb8fadd516f48c, type: 3}
+    soundName: Scream4
+    volume: 0.5
+    pitch: 1.258
+    loop: 0
   channel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}

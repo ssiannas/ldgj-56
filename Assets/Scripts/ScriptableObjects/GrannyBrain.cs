@@ -14,6 +14,8 @@ public class GrannyBrain : EnemyBrain
 	private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
 	[SerializeField] private float grannyEyesightRange = 1.5f;
 
+	[SerializeField] private AudioChannel _audioChannel;
+
 	public void OnEnable()
 	{
 		obstacleLayer = COLLISIONS_LAYER_MASK;
@@ -56,11 +58,25 @@ public class GrannyBrain : EnemyBrain
 			if (hit.collider != null && hit.collider.CompareTag("Player"))
 			{
 				lastKnownPosition = entity.playerTransform.position;
-				entity.state = EnemyController.State.FLEEING;
-				entity.animator?.SetBool("isFleeing", true);
+				MoveStateToFleeing(entity);
 			}
 		}
 	} 
+	
+	private void MoveStateToFleeing(EnemyController entity)
+	{
+		if (entity.state == EnemyController.State.FLEEING) return;
+		entity.state = EnemyController.State.FLEEING;
+		entity.animator?.SetBool("isFleeing", true);
+		if (_audioChannel.IsAudioPlaying(entity.Scream)) {
+			_audioChannel.PlayAudio(entity.GetNextScream());
+		} else
+		{
+			_audioChannel.PlayAudio(entity.Scream);
+		}
+	}
+
+
 
 	private void MoveAwayFromPlayer(EnemyController entity)
 	{

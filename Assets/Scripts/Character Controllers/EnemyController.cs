@@ -4,8 +4,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -32,7 +30,15 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float proximityRewardDistance = 4f;
     private float proximityRewardTimer = 0;
 
-
+    private static string[] Screams =
+    {
+        "Scream1",
+        "Scream2",
+        "Scream3",
+        "Scream4"
+    };
+    private System.Random rng = new System.Random();
+    public string Scream;
 
     public void WarmupSpray()
     {
@@ -91,8 +97,15 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        Scream = Screams[rng.Next(0, Screams.Length-1)];
         getRangeCollider().radius = brain.GetEyesightRange();
         animator = GetComponent<Animator>();
+    }
+
+    public string GetNextScream()
+    {
+        Scream = Screams[Array.FindIndex(Screams, s => s == Scream) + 1 % Screams.Length];
+        return Scream;
     }
 
     void Update()
