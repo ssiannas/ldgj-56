@@ -136,7 +136,6 @@ public class GameController : MonoBehaviour
         
         // Reset score
         score = 0;
-        UIManager.Instance.UpdateScore(score);
     }
 
     public void PauseGame()
