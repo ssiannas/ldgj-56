@@ -49,13 +49,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2144f422704157f45ad75337e259087e, type: 3}
     soundName: Theme
     volume: 0.519
-    pitch: 1
+    pitch: 1.05
     loop: 1
   - source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 4fc650815e77c9344963cdf188bf4146, type: 3}
+    clip: {fileID: 8300000, guid: 23579ce1ad27172499a0b7bfc167c387, type: 3}
     soundName: MainMenuTheme
     volume: 0.658
-    pitch: 1.06
+    pitch: 1.13
     loop: 1
   - source: {fileID: 0}
     clip: {fileID: 8300000, guid: 972a72fb609fba142ac88f782f6a9004, type: 3}
