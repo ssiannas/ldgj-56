@@ -194,7 +194,7 @@ MonoBehaviour:
       m_Calls: []
   <reaction>k__BackingField: {fileID: 3130610800948530093}
   reactionDurationSec: 3
-  tauntReward: 20
+  tauntReward: 100
   proximityRewardPerSec: 10
   proximityRewardDistance: 4
   brain: {fileID: 11400000, guid: d8b5839063d673a44b71162c03adac72, type: 2}
