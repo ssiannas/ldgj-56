@@ -48,19 +48,25 @@ MonoBehaviour:
   - source: {fileID: 0}
     clip: {fileID: 8300000, guid: 2144f422704157f45ad75337e259087e, type: 3}
     soundName: Theme
-    volume: 0.7
+    volume: 0.519
     pitch: 1
     loop: 1
   - source: {fileID: 0}
     clip: {fileID: 8300000, guid: 4fc650815e77c9344963cdf188bf4146, type: 3}
     soundName: MainMenuTheme
-    volume: 0.7
-    pitch: 1
+    volume: 0.658
+    pitch: 1.06
     loop: 1
   - source: {fileID: 0}
-    clip: {fileID: 8300000, guid: de2fc06fd33264844a7294a74883d0fa, type: 3}
+    clip: {fileID: 8300000, guid: 972a72fb609fba142ac88f782f6a9004, type: 3}
     soundName: Walking
-    volume: 0.476
-    pitch: 1.09
+    volume: 0.3
+    pitch: 1.45
     loop: 1
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: df27fe175e15e9044bade3922d78fced, type: 3}
+    soundName: Splat
+    volume: 0.371
+    pitch: 0.71
+    loop: 0
   channel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}

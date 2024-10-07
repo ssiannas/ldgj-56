@@ -48,16 +48,16 @@ public class PlayerMovementController
 
     private void MaybePlayWalkAudio(bool isWalking)
     {
-		bool isWalkAudioPlaying = _audioChannel.IsAudioPlaying("WalkRoach");
+		bool isWalkAudioPlaying = _audioChannel.IsAudioPlaying("Walking");
 		// TODO: Change with persistence
 		if (isWalking  && !isWalkAudioPlaying)
 		{
-           _audioChannel.PlayAudio("WalkRoach");
+           _audioChannel.PlayAudio("Walking");
            
 		}
         else if (!isWalking && isWalkAudioPlaying)
         {
-            _audioChannel.StopAudio("WalkRoach");
+            _audioChannel.StopAudio("Walking");
 		}
 	}
 

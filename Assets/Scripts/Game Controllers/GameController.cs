@@ -41,9 +41,12 @@ public class GameController : MonoBehaviour
 
     private State _state = State.Playing;
     private static string HOUSE_SCENE = "House 1 Colliders";
+    private static string MAIN_MENU_SCENE = "Start Menu";
 
-    private void Awake()
+
+	private void Awake()
     {
+        highscore = (uint)PlayerPrefs.GetInt("Highscore", 0);
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -64,6 +67,7 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         if (score > highscore) highscore = score;
+        PlayerPrefs.SetInt("Highscore", (int)score);
         isGameOver = true;
         OnGameOver?.Invoke();
         bool isNewHighScore = score > PlayerPersistence.HighScore;
@@ -92,7 +96,8 @@ public class GameController : MonoBehaviour
     public void AddScore(uint points)
     {
         score += points;
-        UIManager.Instance.UpdateScore(score);
+        if (highscore > score) highscore = score;
+        UIManager.Instance.UpdateScore(score, (int)highscore);
     }
 
     private void TryTogglePauseMenu()
@@ -132,13 +137,17 @@ public class GameController : MonoBehaviour
 
     private void OnHouseSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name != HOUSE_SCENE) return;
+        if (scene.name == MAIN_MENU_SCENE) return;
+
         if (_channel.IsAudioPlaying("MainMenuTheme"))
         {
             _channel.StopAudio("MainMenuTheme");
         }
 
-        _channel.PlayAudio("Theme");
+        if (!PlayerPersistence.MusicMuted)
+        {
+            _channel.PlayAudio("Theme");
+        }
         
         // Reset score
         score = 0;

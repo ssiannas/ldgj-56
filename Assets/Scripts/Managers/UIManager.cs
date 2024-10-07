@@ -36,6 +36,7 @@ namespace Managers
             {
                 Instance = this;
             }
+
         }
 
         void Start()
@@ -79,10 +80,10 @@ namespace Managers
             gameOverMenu.SetActive(true);
             gameOverMenu.GetComponent<GameOverMenu>().SetScore(score, highScore, isNewHighScore);
         }
-
-        public void UpdateScore(float score)
+        
+        public void UpdateScore(float score, int highscore)
         {
-            scoreBoard?.GetComponent<ScoreController>().UpdateScore(score);
+            scoreBoard?.GetComponent<ScoreController>().UpdateScore(score, highscore);
         }
 
         public void ShowScoreText(bool show)
