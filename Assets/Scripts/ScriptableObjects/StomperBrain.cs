@@ -63,13 +63,15 @@ public class StomperBrain : EnemyBrain
 		}
 	}
 
-	private void HandleChase(EnemyController entity) {
-        if (!entity.isMoving)
+	private void HandleChase(EnemyController entity)
+	{
+		if (!entity.isMoving)
         {
 			entity.isMoving = true;
         }
         entity.animator?.SetBool("isChasing", true);
 		MoveTowardsLastKnownPosition(entity);
+
 
 	}
 
@@ -104,12 +106,11 @@ public class StomperBrain : EnemyBrain
 		Transform entityTransform = entity.transform;
 		Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position);
 		turn =  HandleObstacles(entity, directionToTarget.normalized);
-		Debug.Log("Before: " + directionToTarget.ToString());
 		directionToTarget += (Vector2)turn;
-		Debug.Log("After: " + directionToTarget.ToString());
 		entity.Move((Vector3)(directionToTarget.normalized * moveSpeed * Time.deltaTime));
 		
 		//
+		
 
 		if (Vector2.Distance(entityTransform.position, lastKnownPosition) < 0.1f) // Adjust the threshold as needed
 		{
@@ -244,5 +245,6 @@ public class StomperBrain : EnemyBrain
 		Debug.Log("aha");
 		return Vector3.zero;
 	}
+
 }
 
