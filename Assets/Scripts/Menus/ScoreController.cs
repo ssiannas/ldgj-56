@@ -8,7 +8,6 @@ public class ScoreController : MonoBehaviour
 
     private TextMeshProUGUI text;
     private static string TEXT_HEADER = "Score: ";
-    private static string HIGHSCORE_HEADER = "Highscore: ";
 
     // Start is called before the first frame update
     void Start()

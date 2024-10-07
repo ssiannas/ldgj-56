@@ -12,7 +12,14 @@ public class GameOverMenu : MonoBehaviour
     public void SetScore(int score, int highScore, bool isNewHighScore)
     {
         scoreText.text = $"Score: {score}";
-        highScoreText.text = $"New High Score: {highScore}";
+        if (isNewHighScore)
+        {
+            highScoreText.text = $"New High Score: {highScore}";
+        }
+        else
+        {
+            highScoreText.text = $"Previous High Score: {highScore}";
+        }
     }
 
     public void StartMenuButtonHandle()
