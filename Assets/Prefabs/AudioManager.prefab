@@ -69,4 +69,10 @@ MonoBehaviour:
     volume: 0.371
     pitch: 0.71
     loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6176838b7be93c041a264aa37b7382cb, type: 3}
+    soundName: Alarm
+    volume: 0.6
+    pitch: 1
+    loop: 0
   channel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}

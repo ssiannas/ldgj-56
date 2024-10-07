@@ -25,6 +25,8 @@ public class PestControlBrain : EnemyBrain
     private float _waitCounter = 0f;
     private bool _waiting = false;
 
+    [SerializeField] AudioChannel _audioChannel;
+
     public void OnEnable()
     {
         obstacleLayer = COLLISIONS_LAYER_MASK;
@@ -129,13 +131,19 @@ public class PestControlBrain : EnemyBrain
                 }
                 else
                 {
-                    entity.state = EnemyController.State.CHASING;
+                    MoveToStateChasing(entity);
                 }
             }
         }
     }
+    private void	MoveToStateChasing(EnemyController entity)
+    {
+        if (entity.state == EnemyController.State.CHASING) return; 
+		entity.state = EnemyController.State.CHASING;
+        _audioChannel.PlayAudio("Alarm");
+    }
 
-    private void MoveToStateWarmup(EnemyController entity)
+	private void MoveToStateWarmup(EnemyController entity)
     {
         entity.state = EnemyController.State.SPRAY_WARMUP;
         entity.StartCoroutine(WarmupAndSpray(entity));
