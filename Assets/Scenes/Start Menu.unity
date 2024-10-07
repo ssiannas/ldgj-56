@@ -758,7 +758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1816304711614248206, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_text
-      value: Pest Control
+      value: Tiny Taunters
       objectReference: {fileID: 0}
     - target: {fileID: 1816304711614248206, guid: 038580dd50cec01408eb03de92710c54, type: 3}
       propertyPath: m_hasFontAssetChanged
