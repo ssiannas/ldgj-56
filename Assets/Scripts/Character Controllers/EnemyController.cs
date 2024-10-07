@@ -139,6 +139,7 @@ public class EnemyController : MonoBehaviour
 
     public void TriggerReaction()
     {
+        Debug.Log($"{gameObject.name} is angery!");
         StartCoroutine(ShowReaction());
     }
 

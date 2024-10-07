@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioChannel _channel;
 
+    [field: SerializeField] public float TauntRadius { get; private set; } = 4f;
+
     private void Awake()
     {
         Debug.Log($"Selected Character is: {PersistentState.CharacterChoice.name}");

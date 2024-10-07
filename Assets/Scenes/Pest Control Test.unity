@@ -1255,6 +1255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roachie (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8355794419447069421, guid: c46cf15ff1a6b894a881252e005e7862, type: 3}
+      propertyPath: <TauntRadius>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

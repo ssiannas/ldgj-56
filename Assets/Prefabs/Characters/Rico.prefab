@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3789119977842346047}
   - component: {fileID: 3143886992083472692}
   - component: {fileID: 2961698145942500996}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rico
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,6 +174,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <reaction>k__BackingField: {fileID: 7266368166555371404}
+  reactionDurationSec: 3
   brain: {fileID: 11400000, guid: 5cf54d6c8276e9f41a497b15a2d9528f, type: 2}
   state: 0
   isMoving: 0

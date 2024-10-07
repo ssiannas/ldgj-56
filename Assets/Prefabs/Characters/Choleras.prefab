@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6419654986241877807}
   - component: {fileID: 8916273354620483925}
   - component: {fileID: 5082621177224098985}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Choleras
   m_TagString: Stomper
   m_Icon: {fileID: 0}
@@ -193,6 +193,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <reaction>k__BackingField: {fileID: 3130610800948530093}
+  reactionDurationSec: 3
   brain: {fileID: 11400000, guid: d8b5839063d673a44b71162c03adac72, type: 2}
   state: 0
   isMoving: 0
