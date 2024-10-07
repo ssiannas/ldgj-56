@@ -14,7 +14,7 @@ public class ScoreController : MonoBehaviour
     void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
-        UpdateScore(0, PlayerPrefs.GetInt("Highscore", 0));
+        UpdateScore(0);
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class ScoreController : MonoBehaviour
         
     }
 
-    public void UpdateScore(float score, int highscore)
+    public void UpdateScore(float score)
     {
         text.SetText($"{TEXT_HEADER}{score}");
     }
