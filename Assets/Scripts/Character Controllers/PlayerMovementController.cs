@@ -39,8 +39,27 @@ public class PlayerMovementController
 
     private void MaybeWalk()
     {
-        _animator.SetBool("isWalking", _direction != Vector2.zero && !isTaunting);
+        bool isWalking = _direction != Vector2.zero && !isTaunting;
+
+        _animator.SetBool("isWalking", isWalking);
+
+        MaybePlayWalkAudio(isWalking);
     }
+
+    private void MaybePlayWalkAudio(bool isWalking)
+    {
+		bool isWalkAudioPlaying = _audioChannel.IsAudioPlaying("WalkRoach");
+		// TODO: Change with persistence
+		if (isWalking  && !isWalkAudioPlaying)
+		{
+           _audioChannel.PlayAudio("WalkRoach");
+           
+		}
+        else if (!isWalking && isWalkAudioPlaying)
+        {
+            _audioChannel.StopAudio("WalkRoach");
+		}
+	}
 
     public void OnUpdate()
     {

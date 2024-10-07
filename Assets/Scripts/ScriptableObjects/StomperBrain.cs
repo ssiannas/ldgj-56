@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "StomperBrain", menuName = "ScriptableObjects/EnemyAI/StomperBrain", order = 1)]
 public class StomperBrain : EnemyBrain
@@ -23,11 +24,11 @@ public class StomperBrain : EnemyBrain
 	private float _waitCounter = 0f;
 	private bool _waiting = false;
 
-	[SerializeField] private float _rotationSpeed;
 
-	[SerializeField] private float _obstacleCheckCircleRadius;
-	[SerializeField] private float _obstacleCheckDistance;
-
+	private float _obstacleAvoidanceCooldown;
+	private Vector2 _obstacleAvoidanceTargetDirection;
+	private RaycastHit2D[] _obstacleCollisions = new RaycastHit2D[10];
+	private Vector3 turn;
 
 	public void OnEnable()
 	{
@@ -69,6 +70,7 @@ public class StomperBrain : EnemyBrain
         }
         entity.animator?.SetBool("isChasing", true);
 		MoveTowardsLastKnownPosition(entity);
+
 	}
 
 	private void HandleAlert(EnemyController entity) 
@@ -100,8 +102,14 @@ public class StomperBrain : EnemyBrain
 	private void MoveTowardsLastKnownPosition(EnemyController entity)
 	{
 		Transform entityTransform = entity.transform;
-		Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position).normalized;
-		entity.Move((Vector3)(directionToTarget * moveSpeed * Time.deltaTime));
+		Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position);
+		turn =  HandleObstacles(entity, directionToTarget.normalized);
+		Debug.Log("Before: " + directionToTarget.ToString());
+		directionToTarget += (Vector2)turn;
+		Debug.Log("After: " + directionToTarget.ToString());
+		entity.Move((Vector3)(directionToTarget.normalized * moveSpeed * Time.deltaTime));
+		
+		//
 
 		if (Vector2.Distance(entityTransform.position, lastKnownPosition) < 0.1f) // Adjust the threshold as needed
 		{
@@ -191,45 +199,50 @@ public class StomperBrain : EnemyBrain
 		return UnityEngine.Random.insideUnitCircle * radius + center;
 
 	}
-
-
-
-	private void HandleObstacles(EnemyController entity)
+	private Vector3 HandleObstacles(EnemyController entity, Vector3 currDirr)
 	{
-	//	_obstacleAvoidanceCooldown -= Time.deltaTime;
+		_obstacleAvoidanceCooldown -= Time.deltaTime;
 
-	//	var contactFilter = new ContactFilter2D();
-	//	contactFilter.SetLayerMask(obstacleLayer);
+		var contactFilter = new ContactFilter2D();
+		contactFilter.SetLayerMask(obstacleLayer);
 
-	//	int numberOfCollisions = Physics2D.CircleCast(
-	//		entity.transform.position,
-	//		_obstacleCheckCircleRadius,
-	//		transform.up,
-	//		contactFilter,
-	//		_obstacleCollisions,
-	//		_obstacleCheckDistance);
+		int numberOfCollisions = Physics2D.CircleCast(
+			entity.transform.position,
+			entity._obstacleCheckCircleRadius,
+			currDirr,
+			contactFilter,
+			_obstacleCollisions,
+			entity._obstacleCheckDistance);
+		Debug.Log("ti");
+		for (int index = 0; index < numberOfCollisions; index++)
+		{
+			var obstacleCollision = _obstacleCollisions[index];
 
-	//	for (int index = 0; index < numberOfCollisions; index++)
-	//	{
-	//		var obstacleCollision = _obstacleCollisions[index];
+			if (obstacleCollision.collider.CompareTag("Player"))
+			{
+				Debug.Log("den");
+				continue;
+			}
 
-	//		if (obstacleCollision.collider.gameObject == gameObject)
-	//		{
-	//			continue;
-	//		}
+			Debug.Log("sou");
+			if (_obstacleAvoidanceCooldown <= 0)
+			{
+				_obstacleAvoidanceTargetDirection = obstacleCollision.normal;
+				_obstacleAvoidanceCooldown = 0.5f;
+			}
+			Debug.Log("aresei");
 
-	//		if (_obstacleAvoidanceCooldown <= 0)
-	//		{
-	//			_obstacleAvoidanceTargetDirection = obstacleCollision.normal;
-	//			_obstacleAvoidanceCooldown = 0.5f;
-	//		}
+			var newRotation = currDirr + (Vector3)(obstacleCollision.normal);
 
-	//		var targetRotation = Quaternion.LookRotation(transform.forward, _obstacleAvoidanceTargetDirection);
-	//		var rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+			var targetRotation = Quaternion.LookRotation(entity.transform.forward, _obstacleAvoidanceTargetDirection);
+			var rotation = Quaternion.RotateTowards(entity.transform.rotation, targetRotation, entity._rotationSpeed * Time.deltaTime);
 
-	//		_targetDirection = rotation * Vector2.up;
-	//		break;
-	//	}
+			Debug.Log("oho");
+			return rotation * Vector2.up;
+
+		}
+		Debug.Log("aha");
+		return Vector3.zero;
 	}
 }
 
