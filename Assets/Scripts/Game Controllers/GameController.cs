@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour
 	private void Awake()
     {
         highscore = (uint)PlayerPrefs.GetInt("Highscore", 0);
+        PlayerPersistence.HighScore = (int)highscore;
         if (Instance != null && Instance != this)
         {
             Destroy(this);
