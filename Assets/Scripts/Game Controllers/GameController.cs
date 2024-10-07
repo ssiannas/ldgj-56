@@ -70,18 +70,22 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        if (score > highscore) highscore = score;
-        PlayerPrefs.SetInt("Highscore", (int)score);
-#if UNITY_WEBGL
-        JS_FileSystem_Sync();
-#endif
-        isGameOver = true;
-        OnGameOver?.Invoke();
-        bool isNewHighScore = score > PlayerPersistence.HighScore;
+        bool isNewHighScore = (score > highscore);
         if (isNewHighScore)
         {
+           Debug.Log($"Old High Score: {highscore}, New HS: {score}");
+           highscore = score;
+
             PlayerPersistence.HighScore = (int)score;
-        }
+			PlayerPrefs.SetInt("Highscore", PlayerPersistence.HighScore);
+            PlayerPrefs.Save();
+			#if UNITY_WEBGL
+				JS_FileSystem_Sync();
+			#endif
+        }        
+        isGameOver = true;
+        OnGameOver?.Invoke();
+
         UIManager.Instance.ShowGameOverMenu((int)score, PlayerPersistence.HighScore, isNewHighScore);
     }
 
@@ -103,7 +107,6 @@ public class GameController : MonoBehaviour
     public void AddScore(uint points)
     {
         score += points;
-        if (highscore > score) highscore = score;
         UIManager.Instance.UpdateScore(score);
     }
 
