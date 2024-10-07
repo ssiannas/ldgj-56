@@ -696,6 +696,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4509962167381300277}
+  - {fileID: 2091593419}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &333533559
@@ -3024,10 +3025,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roachie
       objectReference: {fileID: 0}
-    - target: {fileID: 8355794419447069421, guid: c46cf15ff1a6b894a881252e005e7862, type: 3}
-      propertyPath: _channel
-      value: 
-      objectReference: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -145894,6 +145891,7 @@ MonoBehaviour:
   highscore: 0
   timeModifier: 1
   _channel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
+  <PlayerPersistence>k__BackingField: {fileID: 0}
   isGameOver: 0
 --- !u!4 &2091593419
 Transform:
@@ -146138,4 +146136,3 @@ SceneRoots:
   - {fileID: 52256017}
   - {fileID: 2136502036}
   - {fileID: 1489569602}
-  

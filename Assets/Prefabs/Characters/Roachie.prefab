@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PersistentState>k__BackingField: {fileID: 11400000, guid: 7244465e384feeb4f91073af5d8c3867, type: 2}
+  _channel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
+  <TauntRadius>k__BackingField: 4
 --- !u!50 &7382919463990735630
 Rigidbody2D:
   serializedVersion: 4

@@ -66,6 +66,7 @@ public class PlayerMovementController
         MaybePlayTauntAnimation();
 
         // Taunt enemies
+        Debug.Log($"TauntRadius = {_playerController.TauntRadius}");
         LayerMask mask = LayerMask.GetMask("Enemies"); //LayerMask.NameToLayer("Enemies"));
         var enemiesHit = Physics2D.OverlapCircleAll(_playerController.transform.position, _playerController.TauntRadius,
             mask);
@@ -77,6 +78,11 @@ public class PlayerMovementController
 
     private void CheckEnemyTaunt(Collider2D enemy)
     {
+        // Check if is in range
+        var distance = Vector3.Distance(enemy.transform.position, _playerController.transform.position);
+        Debug.Log($"Distance from {enemy.gameObject.name} is {distance}");
+        if (distance > _playerController.TauntRadius) return;
+
         var hits = Physics2D.LinecastAll(
             _playerController.transform.position,
             enemy.transform.position,
