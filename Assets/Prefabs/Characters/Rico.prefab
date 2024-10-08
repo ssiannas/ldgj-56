@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6355660359076097144}
   - component: {fileID: 3789119977842346047}
   - component: {fileID: 3143886992083472692}
-  - component: {fileID: 2961698145942500996}
+  - component: {fileID: 5044052172505197741}
   m_Layer: 7
   m_Name: Rico
   m_TagString: Stomper
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2b014106e4ab11b4ab5a6860004c340c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -185,6 +185,13 @@ MonoBehaviour:
   <_obstacleCheckDistance>k__BackingField: 0
   isMoving: 0
   currentWaypointIndex: 0
+  scream:
+    source: {fileID: 0}
+    clip: {fileID: 0}
+    soundName: 
+    volume: 0.7
+    pitch: 1
+    loop: 0
 --- !u!95 &3143886992083472692
 Animator:
   serializedVersion: 5
@@ -206,8 +213,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!70 &2961698145942500996
-CapsuleCollider2D:
+--- !u!60 &5044052172505197741
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -238,9 +245,36 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02, y: -0.1}
-  m_Size: {x: 0.39, y: 0.89}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.2, y: 1.2}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.13, y: -0.34}
+      - {x: 0.13, y: 0.049999997}
+      - {x: 0.12, y: 0.14999999}
+      - {x: 0.089999996, y: 0.22999999}
+      - {x: -0.02, y: 0.29}
+      - {x: -0.08, y: 0.31}
+      - {x: -0.12, y: 0.31}
+      - {x: -0.17, y: 0.26}
+      - {x: -0.19, y: -0.099999994}
+      - {x: -0.19, y: -0.24}
+      - {x: -0.14999999, y: -0.39999998}
+      - {x: -0.17999999, y: -0.48}
+      - {x: -0.11, y: -0.5}
+      - {x: 0.02, y: -0.5}
+      - {x: 0.07, y: -0.48}
+      - {x: 0.099999994, y: -0.45}
+      - {x: 0.11, y: -0.42999998}
+  m_UseDelaunayMesh: 0
 --- !u!1001 &3769962870132324559
 PrefabInstance:
   m_ObjectHideFlags: 0

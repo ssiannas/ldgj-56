@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6303023730688483340}
   - component: {fileID: 7071720402178623640}
-  - component: {fileID: 7737690113926191689}
+  - component: {fileID: 3841357700405630351}
   m_Layer: 0
   m_Name: Armchair
   m_TagString: Untagged
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: ff851ad908fe9774aa3415880623131d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &7737690113926191689
-CapsuleCollider2D:
+--- !u!60 &3841357700405630351
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,6 +117,39 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011188507, y: -0.04848957}
-  m_Size: {x: 0.9687424, y: 0.98366547}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.2, y: 1.2}
+    newSize: {x: 1.2, y: 1.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.39, y: -0.19999999}
+      - {x: 0.39, y: -0.02}
+      - {x: 0.29999998, y: 0.03}
+      - {x: 0.34, y: 0.29999998}
+      - {x: 0.29, y: 0.34}
+      - {x: 0.17, y: 0.34}
+      - {x: 0.08, y: 0.32999998}
+      - {x: -0.17999999, y: 0.34}
+      - {x: -0.29999998, y: 0.32999998}
+      - {x: -0.32, y: 0.29}
+      - {x: -0.31, y: 0.22}
+      - {x: -0.31, y: 0.02}
+      - {x: -0.42999998, y: -0.06}
+      - {x: -0.42999998, y: -0.19}
+      - {x: -0.39, y: -0.22999999}
+      - {x: -0.29999998, y: -0.31}
+      - {x: -0.22999999, y: -0.42999998}
+      - {x: -0.21, y: -0.45}
+      - {x: -0.17999999, y: -0.45999998}
+      - {x: -0.08, y: -0.45999998}
+      - {x: 0.089999996, y: -0.42}
+      - {x: 0.17999999, y: -0.44}
+      - {x: 0.29, y: -0.39999998}
+  m_UseDelaunayMesh: 0
