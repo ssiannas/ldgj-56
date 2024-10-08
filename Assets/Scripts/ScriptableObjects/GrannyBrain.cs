@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
+using static Unity.VisualScripting.Member;
 
 [CreateAssetMenu(fileName = "GrannyBrain", menuName = "ScriptableObjects/EnemyAI/GrannyBrain", order = 1)]
 
@@ -17,6 +19,8 @@ public class GrannyBrain : EnemyBrain
 	[SerializeField] private AudioChannel _audioChannel;
 	
 	private System.Random _random = new System.Random();
+	[SerializeField] private GameObject kidFaintPrefab;
+	private int tauntCountToFaint = 5;
 
 	public void OnEnable()
 	{
@@ -29,7 +33,7 @@ public class GrannyBrain : EnemyBrain
 	}
 
 	public Sound GetRandomScream() { 
-		return enemySounds[_random.Next(0, enemySounds.Count -1)];
+		return enemySounds[_random.Next(0, enemySounds.Count - 2)];
 	}
 		 
 	public override void Think(EnemyController entity)
@@ -75,7 +79,6 @@ public class GrannyBrain : EnemyBrain
 		entity.state = EnemyController.State.FLEEING;
 		entity.animator?.SetBool("isFleeing", true);
 		entity.PlayScream();
-		
 	}
 
 
@@ -98,5 +101,31 @@ public class GrannyBrain : EnemyBrain
 	{
 		entity.state = EnemyController.State.IDLE;
 		entity.animator?.SetBool("isFleeing", false);
+	}
+
+	public override void OnTaunt(EnemyController entity, int tauntCount)
+	{
+		if (tauntCount == tauntCountToFaint)
+		{
+			Vector3 pos = entity.transform.position;
+			entity.PlayAudio(enemySounds.Find(s => s.soundName == "Faint"));
+			var kid = Instantiate(kidFaintPrefab, pos, Quaternion.Euler(0, 0, 90));
+			PlayFaintOnKid(kid);
+			entity.StopCoroutine(entity.ShowReaction());
+			Destroy(entity.gameObject);
+		}
+	}
+
+	public void PlayFaintOnKid(GameObject kid)
+	{
+		var source = kid.AddComponent<AudioSource>();
+		var s = enemySounds.Find(s => s.soundName == "Faint");
+		if (s is null) return;
+		source.clip = s.clip;
+		source.volume = s.volume;
+		source.pitch = s.pitch;
+		source.loop = s.loop;
+		s.source = source;
+		source.Play();
 	}
 }

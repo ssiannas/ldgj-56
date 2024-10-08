@@ -21,21 +21,27 @@ MonoBehaviour:
     loop: 0
   - source: {fileID: 0}
     clip: {fileID: 8300000, guid: 5e62b4c4e12e14b47b98970cd0938680, type: 3}
-    soundName: Scream1
+    soundName: Scream2
     volume: 0.471
     pitch: 1.229
     loop: 0
   - source: {fileID: 0}
     clip: {fileID: 8300000, guid: 84a75e26e7eb67640a387895d33ce917, type: 3}
-    soundName: Scream1
+    soundName: Scream3
     volume: 0.512
     pitch: 1.493
     loop: 0
   - source: {fileID: 0}
     clip: {fileID: 8300000, guid: 3fce66e853a8db64cafb8fadd516f48c, type: 3}
-    soundName: Scream1
+    soundName: Scream4
     volume: 0.554
     pitch: 1.462
+    loop: 0
+  - source: {fileID: 0}
+    clip: {fileID: 8300000, guid: cb9ef295b1bbfa44793c9aa2a8fa34ac, type: 3}
+    soundName: Faint
+    volume: 0.786
+    pitch: 1.283
     loop: 0
   obstacleLayer:
     serializedVersion: 2
@@ -43,3 +49,4 @@ MonoBehaviour:
   moveSpeed: 4
   grannyEyesightRange: 4.07
   _audioChannel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
+  kidFaintPrefab: {fileID: 5152520983270943802, guid: 47ec597f219ae964a8a30ca4d6fbf569, type: 3}

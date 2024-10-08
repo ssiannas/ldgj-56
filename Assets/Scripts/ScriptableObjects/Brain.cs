@@ -13,5 +13,7 @@ public abstract class EnemyBrain : ScriptableObject
 	public virtual void FlipColliders(EnemyController entity) { }
 
 	public virtual List<Sound> GetEnemySounds() { return null; }
+
+	public virtual void OnTaunt(EnemyController entity, int tauntCount) { }
 }
 

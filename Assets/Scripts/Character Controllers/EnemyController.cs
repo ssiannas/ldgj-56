@@ -31,6 +31,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private uint proximityRewardPerSec = 10;
     [SerializeField] private float proximityRewardDistance = 4f;
     private float proximityRewardTimer = 0;
+
+    private int tauntCount = 0;
+
     public void WarmupSpray()
     {
         Debug.Log("Ramping Up spray....");
@@ -87,12 +90,12 @@ public class EnemyController : MonoBehaviour
     public int currentWaypointIndex;
 
     private AudioSource enemyAudioEffects;
-    public Sound scream;
+    public Sound scream { get; private set; }
     private Sound fxPlaying;
 
     private void Start()
     {   
-        enemyAudioEffects = gameObject.AddComponent<AudioSource>();
+        enemyAudioEffects = gameObject.AddComponent<AudioSource>() as AudioSource;
 		getRangeCollider().radius = brain.GetEyesightRange();
         animator = GetComponent<Animator>();
         // HUGE HACK!!!
@@ -107,10 +110,9 @@ public class EnemyController : MonoBehaviour
         if (s == null) return;
         fxPlaying = s;
         enemyAudioEffects.pitch = s.pitch;
-        enemyAudioEffects.name = s.soundName;
         enemyAudioEffects.time = startTime;
-        enemyAudioEffects.PlayOneShot(s.clip, s.volume);
         s.source = enemyAudioEffects;
+        enemyAudioEffects.PlayOneShot(s.clip, s.volume);
     }
 
     public void StopAudio(Sound s)
@@ -212,18 +214,25 @@ public class EnemyController : MonoBehaviour
 
     public void TriggerReaction()
     {
+        if (!isActiveAndEnabled) return;
         Debug.Log($"{gameObject.name} is angery!");
-        StartCoroutine(ShowReaction());
         GameController.Instance.AddScore(tauntReward);
+        tauntCount += 1;
+        brain.OnTaunt(this, tauntCount);
+        StartCoroutine(ShowReaction());
     }
 
-    IEnumerator ShowReaction()
+    public IEnumerator ShowReaction()
     {
         reaction.SetActive(true); // Set the object active
 
         yield return new WaitForSeconds(reactionDurationSec); // Wait for reactionDurationSec seconds
 
         reaction.SetActive(false); // Set the object inactive 
+        if (transform.localScale == Vector3.zero )
+        {
+           gameObject.SetActive(false);
+        }
     }
    
 }

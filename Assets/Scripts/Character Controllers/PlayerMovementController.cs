@@ -86,20 +86,20 @@ public class PlayerMovementController
 
         // Taunt enemies
         Debug.Log($"TauntRadius = {_playerController.TauntRadius}");
-        LayerMask mask = LayerMask.GetMask("Enemies"); //LayerMask.NameToLayer("Enemies"));
+        LayerMask mask = 1 << LayerMask.NameToLayer("Enemies");
         var enemiesHit = Physics2D.OverlapCircleAll(_playerController.transform.position, _playerController.TauntRadius,
             mask);
-        foreach (var enemy in enemiesHit)
+
+        foreach (var enemy in enemiesHit.Select(c => c.gameObject).Distinct())
         {
             CheckEnemyTaunt(enemy);
         }
     }
 
-    private void CheckEnemyTaunt(Collider2D enemy)
+    private void CheckEnemyTaunt(GameObject enemy)
     {
         // Check if is in range
         var distance = Vector3.Distance(enemy.transform.position, _playerController.transform.position);
-        Debug.Log($"Distance from {enemy.gameObject.name} is {distance}");
         if (distance > _playerController.TauntRadius) return;
 
         var hits = Physics2D.LinecastAll(
