@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b42b784c739ca30488340d9bcbace6e7, type: 3}
   m_Name: PestControlBrain
   m_EditorClassIdentifier: 
+  enemySounds: []
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  moveSpeed: 4
-  eyesightRange: 5.5
+  moveSpeed: 5
+  eyesightRange: 6
   minSprayDistance: 2
-  sprayWaitTimeSec: 1
+  sprayWaitTimeSec: 0.8
   _audioChannel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
