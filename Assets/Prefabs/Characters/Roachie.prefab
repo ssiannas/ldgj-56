@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8542174603133828369}
   - component: {fileID: 6064052921246085190}
   - component: {fileID: 7430069337930800757}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: TauntIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 7382919463990735630}
   - component: {fileID: 477827409352262996}
   - component: {fileID: 822540028205308396}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Roachie
   m_TagString: Player
   m_Icon: {fileID: 0}
