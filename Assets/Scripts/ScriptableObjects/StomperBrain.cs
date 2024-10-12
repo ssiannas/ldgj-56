@@ -10,7 +10,7 @@ public class StomperBrain : EnemyBrain
 {
 
 	[SerializeField] public LayerMask obstacleLayer;
-	[SerializeField] private float moveSpeed = 4f;
+	[SerializeField] private float moveSpeed = 3.5f;
 
 	private Vector2 lastKnownPosition = Vector2.zero;
 	private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
@@ -64,15 +64,19 @@ public class StomperBrain : EnemyBrain
 	}
 
 	private void HandleChase(EnemyController entity)
-	{
+	{	
+		if (Vector2.Distance(lastKnownPosition, entity.transform.position) <= 0.15f)
+		{
+			StopChase(entity);
+			return;
+		}
 		if (!entity.isMoving)
         {
 			entity.isMoving = true;
         }
+
         entity.animator?.SetBool("isChasing", true);
-		MoveTowardsLastKnownPosition(entity);
-
-
+		entity.pathFinding.MoveTowardsPlayer(moveSpeed);
 	}
 
 	private void HandleAlert(EnemyController entity) 
@@ -91,11 +95,12 @@ public class StomperBrain : EnemyBrain
 		if (entity.playerTransform != null)
 		{
 			Vector2 directionToPlayer = (entity.playerTransform.position - entityTransform.position).normalized;
-			RaycastHit2D hit = Physics2D.Raycast(entityTransform.position, directionToPlayer, GetEyesightRange(), obstacleLayer);
-
+			LayerMask mask = LayerMask.GetMask("Player", "Collisions");
+			var normalizedRange = GetEyesightRange();
+			RaycastHit2D hit = Physics2D.Raycast(entityTransform.position, directionToPlayer, normalizedRange, mask);
 			if (hit.collider != null && hit.collider.CompareTag("Player"))
 			{
-				lastKnownPosition = entity.playerTransform.position;
+				lastKnownPosition = hit.collider.transform.position;
 				StateMoveToChase(entity);
 			}
 		}
@@ -106,33 +111,16 @@ public class StomperBrain : EnemyBrain
 		if (entity.state == EnemyController.State.CHASING) return;
 		entity.state = EnemyController.State.CHASING;
 		var witchClip = enemySounds.Find(s => s.soundName == "WitchChase");
+		entity.pathFinding.StartFollow();
 		entity.PlayAudio(witchClip,  UnityEngine.Random.Range(0, witchClip.clip.length));
 	}
-
-	private void MoveTowardsLastKnownPosition(EnemyController entity)
-	{
-		Transform entityTransform = entity.transform;
-		Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position);
-		turn =  HandleObstacles(entity, directionToTarget.normalized);
-		directionToTarget += (Vector2)turn;
-		entity.Move((Vector3)(directionToTarget.normalized * moveSpeed * Time.deltaTime));
-		
-		//
-		
-
-		if (Vector2.Distance(entityTransform.position, lastKnownPosition) < 0.1f) // Adjust the threshold as needed
-		{
-			StopChase(entity);
-			// Maybe implement patrol system with range around LKP
-		}
-	}
-
 
 	// State handling
 	private void StopChase(EnemyController entity)
 	{
 		StateMoveToAlert(entity);
 		entity.animator?.SetBool("isChasing", false);
+		entity.pathFinding.StopFollow();
 		entity.StopAudio(enemySounds.Find(s => s.soundName == "WitchChase"));
 	}
 	
@@ -168,9 +156,8 @@ public class StomperBrain : EnemyBrain
 		}
 		else
 		{
-			Vector3 newDirection = (Vector3)((wp - (Vector2)entity.transform.position).normalized * 0.5f* moveSpeed * Time.deltaTime);
-			entity.Move(newDirection);
-
+			Vector3 newDirection = (Vector3)((wp - (Vector2)entity.transform.position).normalized);
+			entity.Move(newDirection, 0.5f * moveSpeed);
 		}
 	}
 
@@ -209,51 +196,5 @@ public class StomperBrain : EnemyBrain
 		return UnityEngine.Random.insideUnitCircle * radius + center;
 
 	}
-	private Vector3 HandleObstacles(EnemyController entity, Vector3 currDirr)
-	{
-		_obstacleAvoidanceCooldown -= Time.deltaTime;
-
-		var contactFilter = new ContactFilter2D();
-		contactFilter.SetLayerMask(obstacleLayer);
-
-		int numberOfCollisions = Physics2D.CircleCast(
-			entity.transform.position,
-			entity._obstacleCheckCircleRadius,
-			currDirr,
-			contactFilter,
-			_obstacleCollisions,
-			entity._obstacleCheckDistance);
-		Debug.Log("ti");
-		for (int index = 0; index < numberOfCollisions; index++)
-		{
-			var obstacleCollision = _obstacleCollisions[index];
-
-			if (obstacleCollision.collider.CompareTag("Player"))
-			{
-				Debug.Log("den");
-				continue;
-			}
-
-			Debug.Log("sou");
-			if (_obstacleAvoidanceCooldown <= 0)
-			{
-				_obstacleAvoidanceTargetDirection = obstacleCollision.normal;
-				_obstacleAvoidanceCooldown = 0.5f;
-			}
-			Debug.Log("aresei");
-
-			var newRotation = currDirr + (Vector3)(obstacleCollision.normal);
-
-			var targetRotation = Quaternion.LookRotation(entity.transform.forward, _obstacleAvoidanceTargetDirection);
-			var rotation = Quaternion.RotateTowards(entity.transform.rotation, targetRotation, entity._rotationSpeed * Time.deltaTime);
-
-			Debug.Log("oho");
-			return rotation * Vector2.up;
-
-		}
-		Debug.Log("aha");
-		return Vector3.zero;
-	}
-
 }
 

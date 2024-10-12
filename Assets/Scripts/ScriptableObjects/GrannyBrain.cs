@@ -63,7 +63,8 @@ public class GrannyBrain : EnemyBrain
 		if (entity.playerTransform != null)
 		{
 			Vector2 directionToPlayer = (entity.playerTransform.position - entityTransform.position).normalized;
-			RaycastHit2D hit = Physics2D.Raycast(entityTransform.position, directionToPlayer, GetEyesightRange(), obstacleLayer);
+			LayerMask mask = obstacleLayer | GetPlayerLayer();
+			RaycastHit2D hit = Physics2D.Raycast(entityTransform.position, directionToPlayer, GetEyesightRange(), mask);
 
 			if (hit.collider != null && hit.collider.CompareTag("Player"))
 			{
@@ -87,7 +88,7 @@ public class GrannyBrain : EnemyBrain
 	{
 		Transform entityTransform = entity.transform;
 		Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position).normalized;
-		entity.Move(-(Vector3)(directionToTarget * moveSpeed * Time.deltaTime));
+		entity.Move(-directionToTarget, moveSpeed);
 
 
 		if (Vector2.Distance(entityTransform.position, lastKnownPosition) > 2*GetEyesightRange()) // Adjust the threshold as needed

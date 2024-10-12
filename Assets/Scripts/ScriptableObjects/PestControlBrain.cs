@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 public class PestControlBrain : EnemyBrain
 {
     [SerializeField] public LayerMask obstacleLayer;
-    [SerializeField] private float moveSpeed = 4f;
+    [SerializeField] private float moveSpeed = 4.8f;
 
     private Vector2 lastKnownPosition = Vector2.zero;
     private static Int32 COLLISIONS_LAYER_MASK = 1 << 3;
@@ -60,6 +60,7 @@ public class PestControlBrain : EnemyBrain
 
     private void HandleSprayWarmup(EnemyController entity)
     {
+        entity.Move(Vector3.zero, 0);
         entity.isMoving = false;
         entity.animator?.SetBool("isChasing", false);
     }
@@ -117,8 +118,9 @@ public class PestControlBrain : EnemyBrain
         if (entity.playerTransform != null)
         {
             Vector2 directionToPlayer = (entity.playerTransform.position - entityTransform.position).normalized;
+            LayerMask mask = obstacleLayer | GetPlayerLayer();
             RaycastHit2D hit = Physics2D.Raycast(entityTransform.position, directionToPlayer, GetEyesightRange(),
-                obstacleLayer);
+                mask);
 
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
@@ -153,7 +155,7 @@ public class PestControlBrain : EnemyBrain
     {
         Transform entityTransform = entity.transform;
         Vector2 directionToTarget = (lastKnownPosition - (Vector2)entityTransform.position).normalized;
-        entity.Move((Vector3)(directionToTarget * moveSpeed * Time.deltaTime));
+        entity.Move(directionToTarget, moveSpeed);
 
         if (Vector2.Distance(entityTransform.position, lastKnownPosition) < 0.1f) // Adjust the threshold as needed
         {
@@ -202,8 +204,8 @@ public class PestControlBrain : EnemyBrain
         else
         {
             Vector3 newDirection =
-                (Vector3)((wp - (Vector2)entity.transform.position).normalized * 0.5f * moveSpeed * Time.deltaTime);
-            entity.Move(newDirection);
+                (Vector3)((wp - (Vector2)entity.transform.position).normalized);
+            entity.Move(newDirection, moveSpeed * 0.5f);
         }
     }
 

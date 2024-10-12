@@ -30,6 +30,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private uint tauntReward = 20;
     [SerializeField] private uint proximityRewardPerSec = 10;
     [SerializeField] private float proximityRewardDistance = 4f;
+    SpriteRenderer sr;
     private float proximityRewardTimer = 0;
 
     private int tauntCount = 0;
@@ -58,6 +59,7 @@ public class EnemyController : MonoBehaviour
         OozeTargetLine.enabled = false;
 
         animator.SetBool("isSpraying", false);
+        isMoving = true;
         OnShootSpray.Invoke();
     }
 
@@ -91,13 +93,19 @@ public class EnemyController : MonoBehaviour
 
     private AudioSource enemyAudioEffects;
     public Sound scream { get; private set; }
+    public EnemyAIFolow pathFinding {  get; private set; }
     private Sound fxPlaying;
+    Rigidbody2D rigidbody;
 
     private void Start()
     {   
-        enemyAudioEffects = gameObject.AddComponent<AudioSource>() as AudioSource;
+        enemyAudioEffects = gameObject.AddComponent<AudioSource>();
+        pathFinding = gameObject.AddComponent<EnemyAIFolow>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody.drag = 1.5f;
 		getRangeCollider().radius = brain.GetEyesightRange();
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         // HUGE HACK!!!
         if (brain.GetType() == typeof(GrannyBrain))
         {
@@ -181,7 +189,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+	private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -189,9 +197,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void Move(Vector3 direction)
+    public void Move(Vector3 direction, float speed)
     {
-        this.transform.position += direction;
+        rigidbody.velocity = direction * speed;
         MaybeFlipSprite(direction);
         MaybeWalkAnimation(direction);
     }
@@ -209,7 +217,7 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        GetComponent<SpriteRenderer>().flipX = direction.x < 0;
+       sr.flipX = direction.x <= 0;
     }
 
     public void TriggerReaction()

@@ -70,7 +70,7 @@ public class PlayerMovementController
         MaybeFlipSprite();
 
         var speed = isTaunting ? 0 : _playerController.speed;
-        _rb.MovePosition(_rb.position + _direction.normalized * speed * Time.fixedDeltaTime);
+        _rb.velocity = _direction.normalized * speed;
     }
 
     private void Taunt()

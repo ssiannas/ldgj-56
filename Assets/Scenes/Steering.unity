@@ -141,48 +141,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 1145092156}
---- !u!114 &231759676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 231759674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 5
-  radius: 0.5
-  height: 2
-  canMove: 1
-  maxSpeed: 3
-  gravity: {x: NaN, y: NaN, z: NaN}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  centerOffsetCompatibility: NaN
-  repathRateCompatibility: NaN
-  canSearchCompability: 0
-  orientation: 1
-  enableRotation: 0
-  autoRepath:
-    mode: 2
-    interval: NaN
-    sensitivity: 10
-    maximumInterval: 2
-    visualizeSensitivity: 0
-  targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
-  rotationSpeed: 32400
-  slowdownDistance: 0.6
-  pickNextWaypointDist: 1.39
-  endReachedDistance: 0.2
-  alwaysDrawGizmos: 1
-  slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
-  constrainInsideGraph: 1
 --- !u!114 &231759677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,8 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  drawGizmos: 0
-  detailedGizmos: 0
+  drawGizmos: 1
+  detailedGizmos: 1
   startEndModifier:
     addPoints: 0
     exactStartPoint: 3
@@ -361,6 +319,11 @@ PolygonCollider2D:
       - {x: 0.29296875, y: 0.40234375}
       - {x: 0.15234375, y: 0.47265625}
   m_UseDelaunayMesh: 0
+--- !u!1 &604951727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6916918799564938376, guid: c46cf15ff1a6b894a881252e005e7862, type: 3}
+  m_PrefabInstance: {fileID: 1945497064}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &898027331
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +336,7 @@ GameObject:
   - component: {fileID: 898027334}
   - component: {fileID: 898027333}
   - component: {fileID: 898027332}
+  - component: {fileID: 898027336}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -498,6 +462,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &898027336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898027331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8ed1c5c497abd4dae414b1e845708c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dampTime: 0.15
+  target: {fileID: 604951727}
 --- !u!1 &982144529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,15 +978,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1291527605002055972, guid: e00d29f3994f86c4e92986212da70351, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3849890294756661594, guid: e00d29f3994f86c4e92986212da70351, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.78
+      value: -9.34
       objectReference: {fileID: 0}
     - target: {fileID: 3849890294756661594, guid: e00d29f3994f86c4e92986212da70351, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.66
+      value: -7.69
       objectReference: {fileID: 0}
     - target: {fileID: 3849890294756661594, guid: e00d29f3994f86c4e92986212da70351, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1046,6 +1024,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyWitch
       objectReference: {fileID: 0}
+    - target: {fileID: 5700387895719266227, guid: e00d29f3994f86c4e92986212da70351, type: 3}
+      propertyPath: m_Mass
+      value: 1.1836026
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700387895719266227, guid: e00d29f3994f86c4e92986212da70351, type: 3}
+      propertyPath: m_LinearDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700387895719266227, guid: e00d29f3994f86c4e92986212da70351, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5700387895719266227, guid: e00d29f3994f86c4e92986212da70351, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1053,9 +1047,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4354651023535002256, guid: e00d29f3994f86c4e92986212da70351, type: 3}
       insertIndex: -1
       addedObject: {fileID: 231759677}
-    - targetCorrespondingSourceObject: {fileID: 4354651023535002256, guid: e00d29f3994f86c4e92986212da70351, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 231759676}
     - targetCorrespondingSourceObject: {fileID: 4354651023535002256, guid: e00d29f3994f86c4e92986212da70351, type: 3}
       insertIndex: -1
       addedObject: {fileID: 231759675}
@@ -1119,7 +1110,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 4
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 1
@@ -1545,11 +1536,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4232674773830597281, guid: c46cf15ff1a6b894a881252e005e7862, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.93
+      value: 2.15
       objectReference: {fileID: 0}
     - target: {fileID: 4232674773830597281, guid: c46cf15ff1a6b894a881252e005e7862, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.06
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4232674773830597281, guid: c46cf15ff1a6b894a881252e005e7862, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1586,6 +1577,10 @@ PrefabInstance:
     - target: {fileID: 6916918799564938376, guid: c46cf15ff1a6b894a881252e005e7862, type: 3}
       propertyPath: m_Name
       value: Roachie
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382919463990735630, guid: c46cf15ff1a6b894a881252e005e7862, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
