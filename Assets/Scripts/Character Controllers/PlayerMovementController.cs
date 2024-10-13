@@ -85,7 +85,6 @@ public class PlayerMovementController
             new Vector3(_playerController.TauntRadius, _playerController.TauntRadius, 1) * 1.1f;
 
         // Taunt enemies
-        Debug.Log($"TauntRadius = {_playerController.TauntRadius}");
         LayerMask mask = 1 << LayerMask.NameToLayer("Enemies");
         var enemiesHit = Physics2D.OverlapCircleAll(_playerController.transform.position, _playerController.TauntRadius,
             mask);

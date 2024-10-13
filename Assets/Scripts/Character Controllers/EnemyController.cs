@@ -37,7 +37,6 @@ public class EnemyController : MonoBehaviour
 
     public void WarmupSpray()
     {
-        Debug.Log("Ramping Up spray....");
         targetIndicator = Instantiate(OozeTargetPrefab);
         targetIndicator.transform.position = playerTransform.position;
         var startPos = Vector3.Lerp(transform.position, playerTransform.position, 0.5f);
@@ -50,8 +49,6 @@ public class EnemyController : MonoBehaviour
 
     public void ShootSpray()
     {
-        Debug.Log("Spray!");
-
         // Create an Ooze object in scene
         var ooze = Instantiate(OozePrefab);
         ooze.transform.position = targetIndicator.transform.position;
@@ -228,7 +225,6 @@ public class EnemyController : MonoBehaviour
     public void TriggerReaction()
     {
         if (!isActiveAndEnabled) return;
-        Debug.Log($"{gameObject.name} is angery!");
         GameController.Instance.AddScore(tauntReward);
         tauntCount += 1;
         brain.OnTaunt(this, tauntCount);

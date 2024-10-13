@@ -74,7 +74,6 @@ public class GameController : MonoBehaviour
         bool isNewHighScore = (score > highscore);
         if (isNewHighScore)
         {
-           Debug.Log($"Old High Score: {highscore}, New HS: {score}");
            highscore = score;
 
             PlayerPersistence.HighScore = (int)score;

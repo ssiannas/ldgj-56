@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log($"Selected Character is: {PersistentState.CharacterChoice.name}");
         GetComponent<Animator>().runtimeAnimatorController = PersistentState.CharacterChoice.animations;
     }
 
