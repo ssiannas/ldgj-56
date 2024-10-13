@@ -3,13 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text highScoreText;
 
-    public void SetScore(int score, int highScore, bool isNewHighScore)
+    public UnityEvent OnGameOverMenuLoaded;
+
+	private void OnEnable()
+	{
+        OnGameOverMenuLoaded.Invoke();
+	}
+
+	public void SetScore(int score, int highScore, bool isNewHighScore)
     {
         scoreText.text = $"Score: {score}";
         if (isNewHighScore)
