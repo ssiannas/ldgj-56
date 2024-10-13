@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/House 1 Colliders.unity
     guid: 848402c7ecd4d1145b55eba29f38dc16
+  - enabled: 1
+    path: Assets/Scenes/House Steering.unity
+    guid: fec38ffaf271e87439c10554e02bfe4f
   m_configObjects: {}

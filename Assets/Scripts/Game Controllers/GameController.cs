@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
     }
 
     private State _state = State.Playing;
-    private static string HOUSE_SCENE = "House 1 Colliders";
+    private static string HOUSE_SCENE = "House Steering";
     private static string MAIN_MENU_SCENE = "Start Menu";
 
 
