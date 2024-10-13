@@ -73,7 +73,7 @@ public class PestControlBrain : EnemyBrain
         yield return new WaitForSeconds(sprayWaitTimeSec);
 
         entity.ShootSpray();
-        MoveToStateChasing(entity);
+        MoveToStateChasing(entity, playAudio: false);
     }
 
     private void HandleChase(EnemyController entity)
@@ -147,11 +147,11 @@ public class PestControlBrain : EnemyBrain
             }
         }
     }
-    private void MoveToStateChasing(EnemyController entity)
+    private void MoveToStateChasing(EnemyController entity, bool playAudio = true)
     {
         if (entity.state == EnemyController.State.CHASING) return; 
 		entity.state = EnemyController.State.CHASING;
-        _audioChannel.PlayAudio("Alarm");
+        if (playAudio) _audioChannel.PlayAudio("Alarm");
 		entity.pathFinding.StartFollow();
 	}
 
