@@ -52,13 +52,14 @@ public class EnemyAIFolow : MonoBehaviour
 
     private void UpdatePath()
     {
-        if (!seeker.IsDone()) return;
+        if (!seeker.IsDone() || target == null) return;
         seeker.StartPath(rb.position, target.position, OnPathComplete); 
 	}
 
 	public void MoveTowardsPlayer(float speed)
     {
-        if (path == null || !isFollowing) return;
+        if (target == null) return;
+        if (path is null || !isFollowing) return;
         if (currentWaypoint >= path.vectorPath.Count)
         {
             return;
