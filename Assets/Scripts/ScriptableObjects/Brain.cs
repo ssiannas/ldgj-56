@@ -22,5 +22,13 @@ public abstract class EnemyBrain : ScriptableObject
 	public virtual void OnPlayerOutOfSIGHT(EnemyController entity) {}
 
 	public virtual void OnTaunt(EnemyController entity, int tauntCount) { }
+	protected static bool DistanceToEnemyPosValid(Vector2 enemyPos, Vector2 targetPos, float eyesightRange, bool playerInSight)
+	{
+		if (playerInSight) return true;
+		var distanceToEnemy = Vector2.Distance(enemyPos, targetPos);
+		return distanceToEnemy > 0.5f && 
+			   distanceToEnemy < eyesightRange;
+	}
+
 }
 

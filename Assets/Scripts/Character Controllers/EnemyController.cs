@@ -82,9 +82,6 @@ public class EnemyController : MonoBehaviour
     [field: SerializeField] public float _rotationSpeed { get; private set; }
     [field: SerializeField] public float _obstacleCheckCircleRadius { get; private set; }
     [field: SerializeField] public float _obstacleCheckDistance { get; private set; }
-
-
-
     public Animator animator { get; private set; }
     public bool isMoving;
 
@@ -97,12 +94,17 @@ public class EnemyController : MonoBehaviour
     private Sound fxPlaying;
     Rigidbody2D rigidbody;
 
+	private static float MAX_STUCK_TIME_S = 3f; // in seconds
+	private static float POS_STUCK_THRESHOLD_DIST = 0.005f;
+	private Vector2 previousPosition;
+	private float _stuckTimer = 0f;
+
+
     private void Start()
     {   
         enemyAudioEffects = gameObject.AddComponent<AudioSource>();
         pathFinding = gameObject.AddComponent<EnemyAIFolow>();
         rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.drag = 1.5f;
 		getRangeCollider().radius = brain.GetEyesightRange();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
@@ -111,6 +113,7 @@ public class EnemyController : MonoBehaviour
         {
             scream = ((GrannyBrain)brain).GetRandomScream();
         }
+        previousPosition = rigidbody.position;
     }
 
     public void PlayAudio(Sound s, float startTime = 0)
@@ -142,7 +145,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         brain.Think(this);
-
+        
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
             if (Input.GetKeyDown(KeyCode.P))
@@ -199,9 +202,10 @@ public class EnemyController : MonoBehaviour
 
     public void Move(Vector3 direction, float speed)
     {
-        rigidbody.velocity = direction * speed;
-        MaybeFlipSprite(direction);
-        MaybeWalkAnimation(direction);
+        var newVelocity = Vector2.Lerp(rigidbody.velocity, direction * speed, 0.3f);
+		rigidbody.velocity = newVelocity;
+        MaybeFlipSprite(newVelocity);
+        MaybeWalkAnimation(newVelocity);
     }
 
     
@@ -216,8 +220,9 @@ public class EnemyController : MonoBehaviour
         {
             return;
         }
-
-       sr.flipX = direction.x <= 0;
+        var sign = direction.x < 0 ? -1 : 1;
+		transform.localScale = new Vector2(sign*Mathf.Abs(transform.localScale.x),
+                                                          transform.localScale.y);
     }
 
     public void TriggerReaction()
@@ -228,6 +233,24 @@ public class EnemyController : MonoBehaviour
         tauntCount += 1;
         brain.OnTaunt(this, tauntCount);
         StartCoroutine(ShowReaction());
+    }
+
+    public void UpdateStuckTimer()
+    {
+    	Vector2 currentPos = rigidbody.position;
+		float dist = Vector2.Distance(currentPos, previousPosition);
+        previousPosition = currentPos;
+        if (dist < POS_STUCK_THRESHOLD_DIST)
+        {
+            _stuckTimer += Time.deltaTime;
+        } else
+        {
+            _stuckTimer = 0f;
+        }
+    }
+    
+	public bool IsStuckInSamePosition() {
+        return _stuckTimer >= MAX_STUCK_TIME_S;
     }
 
     public IEnumerator ShowReaction()
@@ -242,5 +265,51 @@ public class EnemyController : MonoBehaviour
            gameObject.SetActive(false);
         }
     }
-   
+	 public void ResetPatrolPoints(Vector2 lastKnownPosition, float minDist, float maxDist)
+	{
+		Vector2 currCenter = transform.position;
+		patrolPoints.Clear();
+		if (IsPointValid(lastKnownPosition, currCenter, patrolPoints))
+		{
+
+			patrolPoints.Add(lastKnownPosition);
+		}
+		//Add two random points (i - 1)	
+		for (int i = 0; i < 3; i++)
+		{
+			Vector2 newPt = GetRandomPoint(currCenter, 3);
+
+			while (!IsPointValid(currCenter, newPt, patrolPoints))
+			{
+				newPt = GetRandomPoint(currCenter, 3);
+			}
+			patrolPoints.Add(newPt);
+		}
+
+		patrolPoints.OrderBy(p => Mathf.Atan2(p.y - currCenter.y, p.x - currCenter.x)).ToList();
+	}
+
+	private bool IsPointValid(Vector2 origin, Vector2 point, List<Vector2> previousPoints)
+	{
+		Vector2 direction = (point - origin).normalized;
+		RaycastHit2D hit = Physics2D.Raycast(origin, direction, Vector2.Distance(point, origin), 1 << LayerMask.NameToLayer("Collisions"));
+		if (hit.collider != null)
+		{
+			return false;
+		}
+		foreach (var p in previousPoints)
+		{
+			if (Vector2.Distance(p, point) < 1)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+	private static Vector2 GetRandomPoint(Vector2 center, float radius)
+	{
+		return UnityEngine.Random.insideUnitCircle * radius + center;
+
+	}
 }

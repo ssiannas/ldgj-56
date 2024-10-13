@@ -22,5 +22,5 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  moveSpeed: 4
+  moveSpeed: 3.6
   stomperEyesightRange: 5.5

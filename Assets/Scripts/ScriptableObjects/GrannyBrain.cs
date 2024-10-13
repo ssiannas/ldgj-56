@@ -42,6 +42,11 @@ public class GrannyBrain : EnemyBrain
 		{
 			ShootRayTowardsPlayer(entity);
 		}
+		
+		if (lastKnownPosition != Vector2.zero)
+		{
+			Debug.DrawLine(entity.transform.position, lastKnownPosition, Color.red);
+		}
 
 		switch (entity.state)
 		{

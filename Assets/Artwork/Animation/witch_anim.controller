@@ -73,8 +73,8 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.35478875
-  m_TransitionOffset: 0.028168855
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
   m_ExitTime: 0.099227466
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -98,10 +98,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.54545456
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -123,10 +123,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -232,14 +232,17 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: isChasing
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: isWalking
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1930586947537647291}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.40505368
-  m_TransitionOffset: 0.104557775
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
   m_ExitTime: 0.21602513
   m_HasExitTime: 0
   m_HasFixedDuration: 1
@@ -263,7 +266,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.24999997
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.22687636
   m_HasExitTime: 0
@@ -283,7 +286,7 @@ AnimatorStateTransition:
     m_ConditionEvent: isChasing
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isChasing
+    m_ConditionEvent: isWalking
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8081612663961972890}
@@ -291,10 +294,10 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0.516129
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

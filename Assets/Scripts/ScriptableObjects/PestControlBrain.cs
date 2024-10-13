@@ -24,8 +24,9 @@ public class PestControlBrain : EnemyBrain
     private float _waitTime = 1f; // in seconds
     private float _waitCounter = 0f;
     private bool _waiting = false;
+	private bool _playerInSight = false;
 
-    [SerializeField] AudioChannel _audioChannel;
+	[SerializeField] AudioChannel _audioChannel;
 
     public void OnEnable()
     {
@@ -72,16 +73,22 @@ public class PestControlBrain : EnemyBrain
         yield return new WaitForSeconds(sprayWaitTimeSec);
 
         entity.ShootSpray();
-
-        entity.state = EnemyController.State.CHASING;
+        MoveToStateChasing(entity);
     }
 
     private void HandleChase(EnemyController entity)
     {
-        if (entity.playerInRange)
+		if (entity.playerInRange)
         {
             ShootRayTowardsPlayer(entity);
         }
+		entity.UpdateStuckTimer();
+		if (!DistanceToEnemyPosValid(entity.transform.position, lastKnownPosition, GetEyesightRange(), _playerInSight)
+            || entity.IsStuckInSamePosition())
+		{
+            StopChase(entity);
+			return;
+		}
 
         if (!entity.isMoving)
         {
@@ -89,7 +96,7 @@ public class PestControlBrain : EnemyBrain
         }
 
         entity.animator?.SetBool("isChasing", true);
-        MoveTowardsLastKnownPosition(entity);
+        entity.pathFinding.MoveTowardsPlayer(moveSpeed);
     }
 
     private void HandleAlert(EnemyController entity)
@@ -115,7 +122,8 @@ public class PestControlBrain : EnemyBrain
     private void ShootRayTowardsPlayer(EnemyController entity)
     {
         Transform entityTransform = entity.transform;
-        if (entity.playerTransform != null)
+		_playerInSight = false;
+		if (entity.playerTransform != null)
         {
             Vector2 directionToPlayer = (entity.playerTransform.position - entityTransform.position).normalized;
             LayerMask mask = obstacleLayer | GetPlayerLayer();
@@ -124,11 +132,12 @@ public class PestControlBrain : EnemyBrain
 
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                lastKnownPosition = entity.playerTransform.position;
-
-                var distanceToPlayer = Vector3.Distance(entity.playerTransform.position, entity.transform.position);
+				lastKnownPosition = hit.collider.transform.position;
+				_playerInSight = true;
+				var distanceToPlayer = Vector3.Distance(entity.playerTransform.position, entity.transform.position);
                 if (distanceToPlayer < minSprayDistance)
                 {
+
                     MoveToStateWarmup(entity);
                 }
                 else
@@ -138,16 +147,18 @@ public class PestControlBrain : EnemyBrain
             }
         }
     }
-    private void	MoveToStateChasing(EnemyController entity)
+    private void MoveToStateChasing(EnemyController entity)
     {
         if (entity.state == EnemyController.State.CHASING) return; 
 		entity.state = EnemyController.State.CHASING;
         _audioChannel.PlayAudio("Alarm");
-    }
+		entity.pathFinding.StartFollow();
+	}
 
 	private void MoveToStateWarmup(EnemyController entity)
     {
         entity.state = EnemyController.State.SPRAY_WARMUP;
+        entity.pathFinding.StopFollow();
         entity.StartCoroutine(WarmupAndSpray(entity));
     }
 
@@ -169,14 +180,14 @@ public class PestControlBrain : EnemyBrain
     private void StopChase(EnemyController entity)
     {
         StateMoveToAlert(entity);
-        entity.animator?.SetBool("isChasing", false);
-    }
+		entity.pathFinding.StopFollow();
+		entity.animator?.SetBool("isChasing", false);
+	}
 
-    private void StateMoveToAlert(EnemyController entity)
+	private void StateMoveToAlert(EnemyController entity)
     {
         entity.state = EnemyController.State.ALERT;
-        ResetPatrolPoints(entity, -1, 1);
-        // Maybe init timer to go back to IDLE state
+        entity.ResetPatrolPoints(lastKnownPosition, -1, 1);
     }
 
 
@@ -207,42 +218,5 @@ public class PestControlBrain : EnemyBrain
                 (Vector3)((wp - (Vector2)entity.transform.position).normalized);
             entity.Move(newDirection, moveSpeed * 0.5f);
         }
-    }
-
-
-    private void ResetPatrolPoints(EnemyController entity, float minDist, float maxDist)
-    {
-        Vector2 currCenter = entity.transform.position;
-        entity.patrolPoints.Clear();
-        entity.patrolPoints.Add(lastKnownPosition);
-        //Add two random points (i - 1)	
-        for (int i = 0; i < 3; i++)
-        {
-            Vector2 newPt = GetRandomPoint(currCenter, 3);
-
-            while (!IsPointValid(currCenter, newPt))
-            {
-                newPt = GetRandomPoint(currCenter, 3);
-            }
-
-            entity.patrolPoints.Add(newPt);
-        }
-    }
-
-    private bool IsPointValid(Vector2 origin, Vector2 point)
-    {
-        Vector2 direction = (point - origin).normalized;
-        RaycastHit2D hit = Physics2D.Raycast(origin, direction, Vector2.Distance(point, origin), obstacleLayer);
-        if (hit.collider != null)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    private static Vector2 GetRandomPoint(Vector2 center, float radius)
-    {
-        return UnityEngine.Random.insideUnitCircle * radius + center;
     }
 }

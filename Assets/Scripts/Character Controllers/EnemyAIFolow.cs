@@ -8,7 +8,6 @@ using UnityEngine;
 public class EnemyAIFolow : MonoBehaviour
 {
     public float nextWaypointDistance = 1.5f;
-    public float linearDrag = 1f;
     Path path;
     int currentWaypoint = 0;
 
@@ -62,6 +61,11 @@ public class EnemyAIFolow : MonoBehaviour
         if (path == null || !isFollowing) return;
         if (currentWaypoint >= path.vectorPath.Count)
         {
+            return;
+        }
+        if (path.vectorPath.Count <= 1)
+        {
+            StopFollow();
             return;
         }
 
