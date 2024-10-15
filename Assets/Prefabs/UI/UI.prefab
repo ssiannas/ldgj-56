@@ -1230,6 +1230,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5408367322998518563}
   - {fileID: 6967320994257310866}
   - {fileID: 4792680322570619525}
   m_Father: {fileID: 8448924715041389140}
@@ -3671,7 +3672,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5408367322998518563}
   - {fileID: 4885378413240728992}
   - {fileID: 278578578740911523}
   - {fileID: 3459587420647535094}
@@ -4299,12 +4299,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7418111174249906966}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5499140971687217298}
+  m_Father: {fileID: 635927331084957086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5535,7 +5535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4249187980614446448, guid: c915f6b3620b52545a6947dc58a903c8, type: 3}
       propertyPath: m_text
-      value: QUIT
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 5319392922475019747, guid: c915f6b3620b52545a6947dc58a903c8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -6441,7 +6441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4249187980614446448, guid: c915f6b3620b52545a6947dc58a903c8, type: 3}
       propertyPath: m_text
-      value: RESUME
+      value: Resume
       objectReference: {fileID: 0}
     - target: {fileID: 5319392922475019747, guid: c915f6b3620b52545a6947dc58a903c8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -7202,6 +7202,14 @@ PrefabInstance:
     - target: {fileID: 6106694930651932901, guid: 71878f1e18d81f34ea7f4e692ecb4c25, type: 3}
       propertyPath: m_Name
       value: Title Text
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311661703866369250, guid: 71878f1e18d81f34ea7f4e692ecb4c25, type: 3}
+      propertyPath: m_text
+      value: Tiny Taunters
+      objectReference: {fileID: 0}
+    - target: {fileID: 8311661703866369250, guid: 71878f1e18d81f34ea7f4e692ecb4c25, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
