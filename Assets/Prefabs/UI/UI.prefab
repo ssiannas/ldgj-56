@@ -7806,6 +7806,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7146705054505840941, guid: df87830398db57743b0c5d01c775d450, type: 3}
+      propertyPath: m_ChildScaleHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7577649698299326112, guid: df87830398db57743b0c5d01c775d450, type: 3}
       propertyPath: m_Size
       value: 1
