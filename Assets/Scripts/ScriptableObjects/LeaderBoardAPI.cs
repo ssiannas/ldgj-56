@@ -14,27 +14,37 @@ public class LeaderBoardAPI : ScriptableObject
 		private set => lastUserName = value; 
 		get => lastUserName != null ? lastUserName : "";
 	}
-
+	[field: SerializeField]
+	public bool LeaderBoardFailed { get; private set; } = false;
 	public void FetchLeaderBoard()
-	{
-		LeaderboardCreator.GetLeaderboard(lbPubKey, (_entries) =>
-		{
-			entries = _entries;
-		});
-		UpdatePlayerName();
-	}
-
-	public void FetchLeaderBoard(Action<Entry[]> Callback)
 	{
 		LeaderboardCreator.GetLeaderboard(lbPubKey, (_entries) => {
 			entries = _entries;
+			UpdatePlayerName();
+			LeaderBoardFailed = false;
+		}, (_) => {
+			LeaderBoardFailed = true;
+			Debug.Log("Failed to fetch!");
+		});
+	}
+
+	public void FetchLeaderBoard(Action<Entry[]> Callback, Action<string> ErrorCallback)
+	{
+		if (LeaderBoardFailed) {
+			ErrorCallback("");
+			return;
+		}
+		LeaderboardCreator.GetLeaderboard(lbPubKey, (_entries) => {
+			entries = _entries;
 			Callback(entries);
-		}); 
-		UpdatePlayerName();
+			UpdatePlayerName();
+			LeaderBoardFailed = false;
+		}, ErrorCallback); 
     }
 
 	private void UpdatePlayerName()
 	{
+		if (LeaderBoardFailed) return;
 		LeaderboardCreator.GetPersonalEntry(lbPubKey, (entry) =>
 		{
 			LastUserName = entry.Username;
@@ -47,13 +57,18 @@ public class LeaderBoardAPI : ScriptableObject
 		return entries;
 	}
 
-    public void UploadLeaderBoardEntry(string playerName, int playerScore, Action<Entry[]> Callback)
+    public void UploadLeaderBoardEntry(string playerName, int playerScore, Action<Entry[]> Callback, Action<string> ErrorCallback = null)
     {
+		if (LeaderBoardFailed)
+		{
+			ErrorCallback?.Invoke("");
+			return;
+		}
 		if (!string.IsNullOrWhiteSpace(playerName))
 		{
 			LastUserName = playerName;
 		}
 
-		LeaderboardCreator.UploadNewEntry(lbPubKey, LastUserName, playerScore, (_) => FetchLeaderBoard(Callback));
+		LeaderboardCreator.UploadNewEntry(lbPubKey, LastUserName, playerScore, (_) => FetchLeaderBoard(Callback, ErrorCallback));
     }
 }

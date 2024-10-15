@@ -16,20 +16,29 @@ public class LeaderBoardController : MonoBehaviour
 	private GameObject _namesHolder;
 	private GameObject _scoresHolder;
 
+	[SerializeField]
+	private GameObject _errorMessage;
+	[SerializeField]
+	private GameObject _leaderBoard;
+
 	private void Awake()
 	{
 		_scoresHolder = GameObject.FindWithTag("LeaderBoardScore");
 		_namesHolder = GameObject.FindWithTag("LeaderBoardName");
 		MaybeFetchEntries();
+		if (leaderBoardAPI.LeaderBoardFailed)
+		{
+			OnLBFailed();
+		}
 	}
 
 	private void MaybeFetchEntries()
 	{
 		var currentEntries = leaderBoardAPI.GetCurrentEntries();
 		if (currentEntries.Length == 0) {
-			leaderBoardAPI.FetchLeaderBoard(OnLeaderBoardLoaded);
-		} else
-		{
+			leaderBoardAPI.FetchLeaderBoard(OnLeaderBoardLoaded, OnLBFailed);
+		} else {
+			Debug.Log("Entries are non zero");
 			OnLeaderBoardLoaded(currentEntries);
 		}
 
@@ -39,7 +48,7 @@ public class LeaderBoardController : MonoBehaviour
     {
 		uint score = GameController.Instance.score;
 		string text = playerName.text.Trim().Normalize();
-		leaderBoardAPI.UploadLeaderBoardEntry(text, (int)score, OnLeaderBoardLoaded);
+		leaderBoardAPI.UploadLeaderBoardEntry(text, (int)score, OnLeaderBoardLoaded, OnLBFailed);
     }
 
 	private void EmptyBoard()
@@ -53,9 +62,16 @@ public class LeaderBoardController : MonoBehaviour
 			Destroy(child.gameObject);
 		}
 	}
+	
+	private void OnLBFailed(string _ = "")
+	{
+		_errorMessage.SetActive(true);
+		_leaderBoard.SetActive(false);
+	}
 
     private void OnLeaderBoardLoaded(Dan.Models.Entry[] entry)
     {
+		if (leaderBoardAPI.LeaderBoardFailed) return;
 		EmptyBoard();
         for (int i = 0; i < entry.Length; ++i)
         {
