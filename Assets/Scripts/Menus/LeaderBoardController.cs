@@ -2,71 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using Dan.Main;
 using System;
 
 public class LeaderBoardController : MonoBehaviour
 {
-    [field: SerializeField] private List<TextMeshProUGUI> _leaderBoardScores;
-    [field: SerializeField] private List<TextMeshProUGUI> _leaderBoardNames;
-	private TextMeshProUGUI _scoreText;
+	public LeaderBoardAPI leaderBoardAPI;
 
-	public static LeaderBoardController Instance { get;  private set; }
+	[SerializeField] 
+	private TextMeshProUGUI ScoresPrefab;
+	[SerializeField]
+	private TextMeshProUGUI NamesPrefab;
 
-    private string lbPubKey = "282e85d240147a3ac27cc2f1019ac78ec889ab2d215a67475b28b4657e4b540e";
-	public string lastUserName = null;
+	private GameObject _namesHolder;
+	private GameObject _scoresHolder;
 
 	private void Awake()
 	{
-		if (Instance != null && Instance != this)
-		{
-			Destroy(this);
-		}
-		Instance = this;
-		DontDestroyOnLoad(gameObject);
-		
-		foreach (Transform child in transform)
-		{
-			TextMeshProUGUI textMeshPro = child.GetComponent<TextMeshProUGUI>();
-			if (textMeshPro != null)
-			{
-				if (child.CompareTag("LeaderBoardScore"))
-				{
-					_leaderBoardScores.Add(textMeshPro);
-				}
-				else if (child.CompareTag("LeaderBoardName"))
-				{
-					_leaderBoardNames.Add(textMeshPro);
-				}
-			}
-		}
-		_scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<TextMeshProUGUI>();
-		LeaderboardCreator.GetPersonalEntry(lbPubKey, (entry) => lastUserName = entry.Username);
+		_scoresHolder = GameObject.FindWithTag("LeaderBoardScore");
+		_namesHolder = GameObject.FindWithTag("LeaderBoardName");
+		MaybeFetchEntries();
 	}
 
-	public void GetLeaderBoard()
-    {
-        LeaderboardCreator.GetLeaderboard(lbPubKey, OnLeaderBoardLoaded);
-    }
+	private void MaybeFetchEntries()
+	{
+		var currentEntries = leaderBoardAPI.GetCurrentEntries();
+		if (currentEntries.Length == 0) {
+			leaderBoardAPI.FetchLeaderBoard(OnLeaderBoardLoaded);
+		} else
+		{
+			OnLeaderBoardLoaded(currentEntries);
+		}
+
+	}
 
     public void UploadLeaderBoardEntry(TextMeshProUGUI playerName)
     {
 		uint score = GameController.Instance.score;
-		lastUserName = playerName.text;
-		LeaderboardCreator.UploadNewEntry(lbPubKey, playerName.text, (int)score, (_) => GetLeaderBoard());
+		leaderBoardAPI.UploadLeaderBoardEntry(playerName.text, (int)score, OnLeaderBoardLoaded);
     }
+
+	private void EmptyBoard()
+	{
+		foreach (Transform child in _namesHolder.transform)
+		{
+			Destroy(child.gameObject);
+		}
+		foreach (Transform child in _scoresHolder.transform)
+		{
+			Destroy(child.gameObject);
+		}
+	}
 
     private void OnLeaderBoardLoaded(Dan.Models.Entry[] entry)
     {
-        for (int i = 0; i <  entry.Length; ++i)
+		EmptyBoard();
+        for (int i = 0; i < entry.Length; ++i)
         {
-            _leaderBoardNames[i].text = entry[i].Username;
-            _leaderBoardScores[i].text = entry[i].Score.ToString();
-        }
+			var newName = Instantiate(NamesPrefab, _namesHolder.transform);
+			newName.GetComponent<TextMeshProUGUI>().text = entry[i].Username;
+			var newScore = Instantiate(ScoresPrefab, _scoresHolder.transform);
+			newScore.GetComponent<TextMeshProUGUI>().text = entry[i].Score.ToString();
+		}
     }
-     
-	public string GetUserName()
-	{
-		return lastUserName;
-	}
 }

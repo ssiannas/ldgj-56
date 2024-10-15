@@ -26,7 +26,7 @@ public class GameOverMenu : MonoBehaviour
         }
         else
         {
-            highScoreText.text = $"Previous High Score: {highScore}";
+            highScoreText.text = $"High Score: {highScore}";
         }
     }
 
