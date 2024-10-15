@@ -49,7 +49,11 @@ public class LeaderBoardAPI : ScriptableObject
 
     public void UploadLeaderBoardEntry(string playerName, int playerScore, Action<Entry[]> Callback)
     {
-		LastUserName = playerName;
-		LeaderboardCreator.UploadNewEntry(lbPubKey, playerName, playerScore, (_) => FetchLeaderBoard(Callback));
+		if (!string.IsNullOrWhiteSpace(playerName))
+		{
+			LastUserName = playerName;
+		}
+
+		LeaderboardCreator.UploadNewEntry(lbPubKey, LastUserName, playerScore, (_) => FetchLeaderBoard(Callback));
     }
 }

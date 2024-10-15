@@ -35,10 +35,11 @@ public class LeaderBoardController : MonoBehaviour
 
 	}
 
-    public void UploadLeaderBoardEntry(TextMeshProUGUI playerName)
+    public void UploadLeaderBoardEntry(TMP_InputField playerName)
     {
 		uint score = GameController.Instance.score;
-		leaderBoardAPI.UploadLeaderBoardEntry(playerName.text, (int)score, OnLeaderBoardLoaded);
+		string text = playerName.text.Trim().Normalize();
+		leaderBoardAPI.UploadLeaderBoardEntry(text, (int)score, OnLeaderBoardLoaded);
     }
 
 	private void EmptyBoard()
