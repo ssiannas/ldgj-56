@@ -13,6 +13,6 @@ public class PlaceHolderTextController : MonoBehaviour
         {
             text = "Enter username";
         }
-        GetComponent<TextMeshProUGUI>().text = leaderBoardAPI.LastUserName; 
+        GetComponent<TextMeshProUGUI>().text = text;
     }
 }
