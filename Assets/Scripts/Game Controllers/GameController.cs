@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour
     public event GameOverDelegate OnGameOver;
 
     public bool isGameOver = false;
-
+    public LeaderBoardAPI leaderBoardAPI;
     private enum State
     {
         Paused,
@@ -67,6 +67,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        leaderBoardAPI.FetchLeaderBoard();
     }
 
     public void GameOver()

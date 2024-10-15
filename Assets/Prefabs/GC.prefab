@@ -50,3 +50,4 @@ MonoBehaviour:
   _channel: {fileID: 11400000, guid: 6b73d926cc682784eae9c06835eccda4, type: 2}
   <PlayerPersistence>k__BackingField: {fileID: 11400000, guid: 7244465e384feeb4f91073af5d8c3867, type: 2}
   isGameOver: 0
+  leaderBoardAPI: {fileID: 11400000, guid: 7720189166011bf4996942384e237b7b, type: 2}
